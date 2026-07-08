@@ -7,7 +7,7 @@ import { errorHandler, notFoundHandler } from './middlewares/errorHandler.middle
 export function crearApp(): Application {
   const app = express();
 
-  app.use(cors({ origin: env.clientOrigin, credentials: true }));
+  app.use(cors({ origin: 'https://fitnessrecomp.netlify.app', credentials: true }));
   app.use(express.json());
 
   app.get('/health', (_req, res) => {

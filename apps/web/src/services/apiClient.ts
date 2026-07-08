@@ -9,7 +9,7 @@
  * vez de un genérico "Failed to fetch".
  */
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? 'https://fitness-recomp-api.onrender.com';
+const BASE_URL = import.meta.env.VITE_API_URL ?? 'https://fitness-recomp-api.onrender.com/api';
 
 const CLAVE_TOKEN = 'recomp_token';
 
