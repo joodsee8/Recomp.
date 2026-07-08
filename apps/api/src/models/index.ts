@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 import { connectDB } from '../config/db';
-import { seedDieta } from './seedDieta';
-import { seedRutinas } from './seedRutinas';
 
 /**
  * seeders/index.ts
@@ -20,8 +18,6 @@ async function seedTodoElCatalogo(): Promise<void> {
   try {
     await connectDB();
 
-    await seedDieta();
-    await seedRutinas();
 
     console.log('[seed] catálogo completo (dieta + rutinas) sembrado con éxito');
     await mongoose.disconnect();

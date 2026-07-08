@@ -5,6 +5,7 @@ import { asyncHandler } from '../utils/asyncHandler';
 import { AppError } from '../utils/AppError';
 import { escalarMacrosPorGramos, sumarMacros, restarMacros, MACROS_EN_CERO, IMacrosBase } from '../utils/macros';
 import { obtenerMetaCaloricaVigente } from '../utils/macros';
+
 /** "2026-07-06" -> Date UTC a medianoche, para que el índice único {userId, fecha} sea estable sin importar la hora local del request. */
 function parsearFecha(fechaStr: string): Date {
   const fecha = new Date(`${fechaStr}T00:00:00.000Z`);
@@ -49,7 +50,7 @@ export const obtenerResumenDelDia = asyncHandler(async (req: Request, res: Respo
   const registroDelDia = await MacroLog.findOne({ userId, fecha });
 
   if (!registroDelDia) {
-    const metaVigente = await obtenerMetaCaloricaVigente();
+    const metaVigente = await obtenerMetaCaloricaVigente(req.user?.id||'usuario_default');
     res.json({
       fecha: req.params.fecha,
       alimentosConsumidos: [],
@@ -96,7 +97,7 @@ export const agregarAlimentoConsumido = asyncHandler(async (req: Request, res: R
   let registroDelDia = await MacroLog.findOne({ userId, fecha });
 
   if (!registroDelDia) {
-    const metaVigente = await obtenerMetaCaloricaVigente();
+    const metaVigente = await obtenerMetaCaloricaVigente(userId);
     registroDelDia = await MacroLog.create({
       userId,
       fecha,
@@ -141,13 +142,16 @@ export const eliminarAlimentoConsumido = asyncHandler(async (req: Request, res: 
     throw new AppError(404, 'No hay registro de macros para ese día');
   }
 
-  const item = registroDelDia.alimentosConsumidos.id(itemId);
-  if (!item) {
+ // Buscamos el índice del elemento con JavaScript estándar para que TypeScript no llore
+  const itemIndex = registroDelDia.alimentosConsumidos.findIndex((a: any) => a._id && a._id.toString() === itemId);
+  
+  if (itemIndex === -1) {
     throw new AppError(404, `No existe un alimento registrado con id "${itemId}" en ese día`);
   }
 
-  const macrosARestar = item.macros;
-  item.deleteOne();
+  const macrosARestar = registroDelDia.alimentosConsumidos[itemIndex].macros;
+  // Lo eliminamos del arreglo usando splice
+  registroDelDia.alimentosConsumidos.splice(itemIndex, 1);
 
   registroDelDia.totalesConsumidos = restarMacros(registroDelDia.totalesConsumidos, macrosARestar);
 
