@@ -1,0 +1,53 @@
+.agregar-alimento {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.agregar-alimento-resultados {
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.agregar-alimento-resultado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  background: var(--color-bg);
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: var(--space-3);
+  font-size: 0.85rem;
+}
+.agregar-alimento-resultado:last-child {
+  border-bottom: none;
+}
+.agregar-alimento-resultado:hover {
+  background: var(--color-surface-raised);
+}
+
+.agregar-alimento-resultado-kcal {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.agregar-alimento-vacio {
+  padding: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.agregar-alimento-cantidad {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+.agregar-alimento-cantidad .campo {
+  flex: 1;
+}

@@ -1,0 +1,157 @@
+@import './tokens.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+h2 {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+}
+h3 {
+  font-size: 1rem;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input,
+select {
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+}
+
+/* Cualquier valor numérico de peso/reps/macros pasa por esta clase: números
+   tabulares para que las columnas alineen al comparar semanas. */
+.dato-numerico {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tarjeta {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+}
+
+.boton {
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.boton:hover {
+  border-color: var(--color-text-faint);
+}
+.boton:focus-visible {
+  outline: 2px solid var(--color-carbos);
+  outline-offset: 2px;
+}
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.boton-primario {
+  background: var(--color-proteina);
+  border-color: var(--color-proteina);
+  color: #fff;
+}
+.boton-primario:hover {
+  background: #a83232;
+  border-color: #a83232;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.campo label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+.campo input,
+.campo select {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+}
+.campo input:focus,
+.campo select:focus {
+  outline: 2px solid var(--color-carbos);
+  outline-offset: -1px;
+}
+
+.error-mensaje {
+  color: var(--color-peligro);
+  background: var(--color-peligro-bg);
+  border: 1px solid var(--color-peligro);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  font-size: 0.85rem;
+}
+
+.estado-vacio {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

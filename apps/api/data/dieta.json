@@ -1,0 +1,1036 @@
+{
+  "metaCalorica": {
+    "calorias": 2400,
+    "proteinaG": 190,
+    "carbohidratosG": 220,
+    "grasasG": 70,
+    "fibraG": 35
+  },
+  "alimentos": [
+    {
+      "alimentoId": "huevo_entero",
+      "nombre": "Huevo entero",
+      "categoria": "proteina",
+      "macrosPor100g": {
+        "calorias": 143,
+        "proteinaG": 12.5,
+        "carbohidratosG": 0.7,
+        "grasasG": 9.5
+      },
+      "porcionComunG": 50,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "jamon_pavo",
+      "nombre": "Jamón de pavo",
+      "categoria": "proteina",
+      "macrosPor100g": {
+        "calorias": 104,
+        "proteinaG": 16,
+        "carbohidratosG": 4,
+        "grasasG": 2
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "frijoles_olla",
+      "nombre": "Frijoles de la olla",
+      "categoria": "legumbre",
+      "macrosPor100g": {
+        "calorias": 113,
+        "proteinaG": 6,
+        "carbohidratosG": 20,
+        "grasasG": 1
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "tortilla_maiz",
+      "nombre": "Tortilla de maíz",
+      "categoria": "carbohidrato",
+      "macrosPor100g": {
+        "calorias": 218,
+        "proteinaG": 5.7,
+        "carbohidratosG": 45,
+        "grasasG": 1.5
+      },
+      "porcionComunG": 30,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "avena_hojuelas",
+      "nombre": "Avena en hojuelas",
+      "categoria": "carbohidrato",
+      "macrosPor100g": {
+        "calorias": 389,
+        "proteinaG": 16.9,
+        "carbohidratosG": 66,
+        "grasasG": 6.9
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "platano",
+      "nombre": "Plátano",
+      "categoria": "fruta",
+      "macrosPor100g": {
+        "calorias": 89,
+        "proteinaG": 1,
+        "carbohidratosG": 23,
+        "grasasG": 0.3
+      },
+      "porcionComunG": 100,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "manzana",
+      "nombre": "Manzana",
+      "categoria": "fruta",
+      "macrosPor100g": {
+        "calorias": 52,
+        "proteinaG": 0.3,
+        "carbohidratosG": 14,
+        "grasasG": 0.2
+      },
+      "porcionComunG": 100,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "crema_cacahuate",
+      "nombre": "Crema de cacahuate natural",
+      "categoria": "grasa",
+      "macrosPor100g": {
+        "calorias": 588,
+        "proteinaG": 25,
+        "carbohidratosG": 20,
+        "grasasG": 50
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "leche_light",
+      "nombre": "Leche descremada/light",
+      "categoria": "lacteo",
+      "macrosPor100g": {
+        "calorias": 43,
+        "proteinaG": 3.4,
+        "carbohidratosG": 5,
+        "grasasG": 1
+      },
+      "porcionComunG": 250,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "atun_agua",
+      "nombre": "Atún en agua (escurrido)",
+      "categoria": "proteina",
+      "macrosPor100g": {
+        "calorias": 116,
+        "proteinaG": 26,
+        "carbohidratosG": 0,
+        "grasasG": 1
+      },
+      "porcionComunG": 100,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "mayonesa_light",
+      "nombre": "Mayonesa light",
+      "categoria": "grasa",
+      "macrosPor100g": {
+        "calorias": 270,
+        "proteinaG": 0.9,
+        "carbohidratosG": 11,
+        "grasasG": 25
+      },
+      "porcionComunG": 15,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "tostada_horneada",
+      "nombre": "Tostada horneada",
+      "categoria": "carbohidrato",
+      "macrosPor100g": {
+        "calorias": 333,
+        "proteinaG": 8,
+        "carbohidratosG": 75,
+        "grasasG": 0
+      },
+      "porcionComunG": 12,
+      "marca": "Saníssimo"
+    },
+    {
+      "alimentoId": "aguacate",
+      "nombre": "Aguacate",
+      "categoria": "grasa",
+      "macrosPor100g": {
+        "calorias": 160,
+        "proteinaG": 2,
+        "carbohidratosG": 8.5,
+        "grasasG": 14.7
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "bolillo_sin_migajon",
+      "nombre": "Bolillo (sin migajón)",
+      "categoria": "carbohidrato",
+      "macrosPor100g": {
+        "calorias": 250,
+        "proteinaG": 8,
+        "carbohidratosG": 50,
+        "grasasG": 1
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "queso_panela",
+      "nombre": "Queso panela",
+      "categoria": "lacteo",
+      "macrosPor100g": {
+        "calorias": 200,
+        "proteinaG": 18,
+        "carbohidratosG": 2,
+        "grasasG": 14
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "soya_texturizada",
+      "nombre": "Soya texturizada (seca)",
+      "categoria": "proteina",
+      "macrosPor100g": {
+        "calorias": 315,
+        "proteinaG": 50,
+        "carbohidratosG": 30,
+        "grasasG": 1
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "papa_blanca",
+      "nombre": "Papa blanca",
+      "categoria": "carbohidrato",
+      "macrosPor100g": {
+        "calorias": 77,
+        "proteinaG": 2,
+        "carbohidratosG": 17,
+        "grasasG": 0.1
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "pan_integral",
+      "nombre": "Pan integral",
+      "categoria": "carbohidrato",
+      "macrosPor100g": {
+        "calorias": 250,
+        "proteinaG": 10,
+        "carbohidratosG": 45,
+        "grasasG": 4
+      },
+      "porcionComunG": 30,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "pechuga_pollo",
+      "nombre": "Pechuga de pollo a la plancha",
+      "categoria": "proteina",
+      "macrosPor100g": {
+        "calorias": 165,
+        "proteinaG": 31,
+        "carbohidratosG": 0,
+        "grasasG": 3.6
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "carne_molida_magra",
+      "nombre": "Carne molida magra",
+      "categoria": "proteina",
+      "macrosPor100g": {
+        "calorias": 170,
+        "proteinaG": 26,
+        "carbohidratosG": 0,
+        "grasasG": 7
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "arroz_cocido",
+      "nombre": "Arroz cocido",
+      "categoria": "carbohidrato",
+      "macrosPor100g": {
+        "calorias": 130,
+        "proteinaG": 2.7,
+        "carbohidratosG": 28,
+        "grasasG": 0.3
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "verduras_mixtas",
+      "nombre": "Verduras mixtas / Brócoli",
+      "categoria": "vegetal",
+      "macrosPor100g": {
+        "calorias": 35,
+        "proteinaG": 2.4,
+        "carbohidratosG": 7,
+        "grasasG": 0.4
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "lentejas_cocidas",
+      "nombre": "Lentejas cocidas",
+      "categoria": "legumbre",
+      "macrosPor100g": {
+        "calorias": 116,
+        "proteinaG": 9,
+        "carbohidratosG": 20,
+        "grasasG": 0.4
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "filete_pescado",
+      "nombre": "Filete de pescado blanco",
+      "categoria": "proteina",
+      "macrosPor100g": {
+        "calorias": 96,
+        "proteinaG": 20,
+        "carbohidratosG": 0,
+        "grasasG": 1.7
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "higado_res",
+      "nombre": "Hígado de res",
+      "categoria": "proteina",
+      "macrosPor100g": {
+        "calorias": 135,
+        "proteinaG": 20,
+        "carbohidratosG": 4,
+        "grasasG": 4
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "pasta_cocida",
+      "nombre": "Pasta cocida",
+      "categoria": "carbohidrato",
+      "macrosPor100g": {
+        "calorias": 131,
+        "proteinaG": 5,
+        "carbohidratosG": 25,
+        "grasasG": 1
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "lomo_cerdo",
+      "nombre": "Lomo de cerdo",
+      "categoria": "proteina",
+      "macrosPor100g": {
+        "calorias": 143,
+        "proteinaG": 26,
+        "carbohidratosG": 0,
+        "grasasG": 4
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "chia",
+      "nombre": "Chía",
+      "categoria": "grasa",
+      "macrosPor100g": {
+        "calorias": 486,
+        "proteinaG": 17,
+        "carbohidratosG": 42,
+        "grasasG": 31
+      },
+      "porcionComunG": 15,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "garbanzo_cocido",
+      "nombre": "Garbanzos cocidos",
+      "categoria": "legumbre",
+      "macrosPor100g": {
+        "calorias": 164,
+        "proteinaG": 9,
+        "carbohidratosG": 27,
+        "grasasG": 2.6
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "requeson",
+      "nombre": "Requesón",
+      "categoria": "lacteo",
+      "macrosPor100g": {
+        "calorias": 98,
+        "proteinaG": 11,
+        "carbohidratosG": 3,
+        "grasasG": 4
+      },
+      "porcionComunG": 1,
+      "marca": "Genérico"
+    },
+    {
+      "alimentoId": "cereal_sin_azucar",
+      "nombre": "Cereal sin azúcar (All Bran/Corn Flakes)",
+      "categoria": "carbohidrato",
+      "macrosPor100g": {
+        "calorias": 360,
+        "proteinaG": 8,
+        "carbohidratosG": 80,
+        "grasasG": 1
+      },
+      "porcionComunG": 30,
+      "marca": "Genérico"
+    }
+  ],
+  "comidas": [
+    {
+      "comidaId": "desayuno_1_clasico_mexicano",
+      "nombre": "El Clásico Mexicano",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "huevo_entero",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "jamon_pavo",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "frijoles_olla",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 60
+        }
+      ],
+      "notas": "Salsa al gusto y verduras libres."
+    },
+    {
+      "comidaId": "desayuno_2_avena_bomba",
+      "nombre": "Avena Bomba",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "avena_hojuelas",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "leche_light",
+          "cantidadG": 250
+        },
+        {
+          "alimentoId": "platano",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "crema_cacahuate",
+          "cantidadG": 15
+        }
+      ],
+      "notas": "Puedes agregar un scoop de proteína si tienes."
+    },
+    {
+      "comidaId": "desayuno_3_rapido_post_turno",
+      "nombre": "Desayuno Rápido/Post-Turno",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "atun_agua",
+          "cantidadG": 200
+        },
+        {
+          "alimentoId": "mayonesa_light",
+          "cantidadG": 15
+        },
+        {
+          "alimentoId": "tostada_horneada",
+          "cantidadG": 36
+        },
+        {
+          "alimentoId": "aguacate",
+          "cantidadG": 50
+        }
+      ],
+      "notas": "Agrega pico de gallo al gusto."
+    },
+    {
+      "comidaId": "desayuno_4_licuado_batalla",
+      "nombre": "Licuado de Batalla",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "leche_light",
+          "cantidadG": 375
+        },
+        {
+          "alimentoId": "platano",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "avena_hojuelas",
+          "cantidadG": 50
+        },
+        {
+          "alimentoId": "huevo_entero",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "Ojo wey, los 2 huevos van cocidos aparte, no crudos en el licuado."
+    },
+    {
+      "comidaId": "desayuno_5_molletes_mamados",
+      "nombre": "Molletes Mamados",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "bolillo_sin_migajon",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "frijoles_olla",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "queso_panela",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "huevo_entero",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "Quítale el migajón al bolillo. Corona con pico de gallo y 2 huevos estrellados."
+    },
+    {
+      "comidaId": "desayuno_6_tacos_soya",
+      "nombre": "Tacos de Soya Guisada",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "soya_texturizada",
+          "cantidadG": 50
+        },
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 90
+        }
+      ],
+      "notas": "Guisada con jitomate, cebolla, ajo y jalapeño."
+    },
+    {
+      "comidaId": "desayuno_7_huevos_papa",
+      "nombre": "Huevos con Papa",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "huevo_entero",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "papa_blanca",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 30
+        }
+      ],
+      "notas": "Salsa verde o roja al gusto."
+    },
+    {
+      "comidaId": "desayuno_8_sandwich_pollo",
+      "nombre": "Sándwich de Pollo Frío",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "pan_integral",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "pechuga_pollo",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "manzana",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "Ponle mostaza, lechuga, jitomate, cebolla morada."
+    },
+    {
+      "comidaId": "desayuno_9_omelette_verde",
+      "nombre": "Omelette Verde del Tianguis",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "huevo_entero",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "aguacate",
+          "cantidadG": 50
+        },
+        {
+          "alimentoId": "tostada_horneada",
+          "cantidadG": 24
+        }
+      ],
+      "notas": "Rellena con espinacas y champiñones."
+    },
+    {
+      "comidaId": "desayuno_10_hotcakes_avena",
+      "nombre": "Hotcakes de Avena",
+      "tipo": "Desayuno",
+      "ingredientes": [
+        {
+          "alimentoId": "avena_hojuelas",
+          "cantidadG": 50
+        },
+        {
+          "alimentoId": "platano",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "huevo_entero",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "crema_cacahuate",
+          "cantidadG": 15
+        }
+      ],
+      "notas": "Úntales 1 cucharada de crema de cacahuate natural."
+    },
+    {
+      "comidaId": "comida_1_clasico_gym",
+      "nombre": "El Clásico del Gym",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "pechuga_pollo",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "arroz_cocido",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "verduras_mixtas",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "Sazona chido el pollo con ajo, pimienta, paprika y limón."
+    },
+    {
+      "comidaId": "comida_2_picadillo_rendidor",
+      "nombre": "Picadillo Rendidor",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "carne_molida_magra",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "soya_texturizada",
+          "cantidadG": 25
+        },
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "frijoles_olla",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "La soya hidratada absorbe el sabor de la carne. Échale zanahoria y calabacita."
+    },
+    {
+      "comidaId": "comida_3_salpicon_atun",
+      "nombre": "Salpicón de Atún Fresco",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "atun_agua",
+          "cantidadG": 200
+        },
+        {
+          "alimentoId": "tostada_horneada",
+          "cantidadG": 36
+        },
+        {
+          "alimentoId": "aguacate",
+          "cantidadG": 50
+        }
+      ],
+      "notas": "Mucha lechuga, jitomate, cebolla morada, pepino, rábano, vinagre y limón."
+    },
+    {
+      "comidaId": "comida_4_fajitas_pollo",
+      "nombre": "Fajitas de Pollo",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "pechuga_pollo",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 90
+        }
+      ],
+      "notas": "Guisadas con pimientos y cebolla fileteada."
+    },
+    {
+      "comidaId": "comida_5_lentejas_mamadisimas",
+      "nombre": "Lentejas Mamadísimas",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "lentejas_cocidas",
+          "cantidadG": 300
+        },
+        {
+          "alimentoId": "pechuga_pollo",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "Pico de gallo en abundancia. (Si prefieres, cambia el pollo por 2 huevos cocidos)."
+    },
+    {
+      "comidaId": "comida_6_pescado_empapelado",
+      "nombre": "Filete de Pescado Empapelado",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "filete_pescado",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "arroz_cocido",
+          "cantidadG": 150
+        }
+      ],
+      "notas": "Envuélvelo con jitomate, cebolla, cilantro y limón. Ensalada verde libre."
+    },
+    {
+      "comidaId": "comida_7_higado_encebollado",
+      "nombre": "Hígado Encebollado",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "higado_res",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 60
+        }
+      ],
+      "notas": "Con muchísima cebolla y salsa picante a morir."
+    },
+    {
+      "comidaId": "comida_8_pasta_atunera",
+      "nombre": "Pasta Atunera Salvavidas",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "pasta_cocida",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "atun_agua",
+          "cantidadG": 200
+        },
+        {
+          "alimentoId": "verduras_mixtas",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "mayonesa_light",
+          "cantidadG": 15
+        }
+      ],
+      "notas": "Mezcla todo. Rápido y salva el día."
+    },
+    {
+      "comidaId": "comida_9_enfrijoladas_proteicas",
+      "nombre": "Enfrijoladas Proteicas",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 90
+        },
+        {
+          "alimentoId": "frijoles_olla",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "pechuga_pollo",
+          "cantidadG": 120
+        },
+        {
+          "alimentoId": "queso_panela",
+          "cantidadG": 30
+        }
+      ],
+      "notas": "Frijol molido sin manteca. Coronadas con lechuga, cebolla y salsa."
+    },
+    {
+      "comidaId": "comida_10_tazon_cerdo",
+      "nombre": "Tazón de Cerdo en Salsa Verde",
+      "tipo": "Comida",
+      "ingredientes": [
+        {
+          "alimentoId": "lomo_cerdo",
+          "cantidadG": 150
+        },
+        {
+          "alimentoId": "arroz_cocido",
+          "cantidadG": 75
+        },
+        {
+          "alimentoId": "frijoles_olla",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "Guisado en salsa verde con calabacitas."
+    },
+    {
+      "comidaId": "cena_1_pre_entreno_clasico",
+      "nombre": "El Pre-Entreno Clásico",
+      "tipo": "Snack",
+      "ingredientes": [
+        {
+          "alimentoId": "pan_integral",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "crema_cacahuate",
+          "cantidadG": 15
+        },
+        {
+          "alimentoId": "platano",
+          "cantidadG": 50
+        }
+      ],
+      "notas": "Cómetelo unos 45-60 minutos antes de darle a los fierros."
+    },
+    {
+      "comidaId": "cena_2_avena_nocturna",
+      "nombre": "Avena Nocturna (Overnight Oats)",
+      "tipo": "Cena",
+      "ingredientes": [
+        {
+          "alimentoId": "avena_hojuelas",
+          "cantidadG": 50
+        },
+        {
+          "alimentoId": "leche_light",
+          "cantidadG": 185
+        },
+        {
+          "alimentoId": "chia",
+          "cantidadG": 15
+        }
+      ],
+      "notas": "Déjalo preparado en el refri desde la mañana."
+    },
+    {
+      "comidaId": "cena_3_tacos_huevo",
+      "nombre": "Tacos de Huevo Cocido",
+      "tipo": "Cena",
+      "ingredientes": [
+        {
+          "alimentoId": "huevo_entero",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "aguacate",
+          "cantidadG": 50
+        }
+      ],
+      "notas": "Rápido y cero grasa extra. Con salsa y limón."
+    },
+    {
+      "comidaId": "cena_4_quesadillas_mamadoras",
+      "nombre": "Quesadillas Mamadoras",
+      "tipo": "Cena",
+      "ingredientes": [
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "queso_panela",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "pechuga_pollo",
+          "cantidadG": 50
+        }
+      ],
+      "notas": "Rellena con pico de gallo."
+    },
+    {
+      "comidaId": "cena_5_ensalada_atun_garbanzo",
+      "nombre": "Ensalada Atunera de Garbanzos",
+      "tipo": "Cena",
+      "ingredientes": [
+        {
+          "alimentoId": "atun_agua",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "garbanzo_cocido",
+          "cantidadG": 85
+        }
+      ],
+      "notas": "Con jitomate, cebolla, pepino, limón y chile en polvo."
+    },
+    {
+      "comidaId": "cena_6_ceviche_soya",
+      "nombre": "Ceviche de Soya",
+      "tipo": "Cena",
+      "ingredientes": [
+        {
+          "alimentoId": "soya_texturizada",
+          "cantidadG": 25
+        },
+        {
+          "alimentoId": "tostada_horneada",
+          "cantidadG": 36
+        }
+      ],
+      "notas": "Jugo de limón, pepino, jitomate, cebolla, cilantro y un toque de clamato."
+    },
+    {
+      "comidaId": "cena_7_yogurt_fake",
+      "nombre": "Yogurt Griego Fake",
+      "tipo": "Cena",
+      "ingredientes": [
+        {
+          "alimentoId": "requeson",
+          "cantidadG": 100
+        },
+        {
+          "alimentoId": "leche_light",
+          "cantidadG": 30
+        },
+        {
+          "alimentoId": "manzana",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "Licúa el requesón con poca leche y vainilla. Agrega la fruta que esté de temporada."
+    },
+    {
+      "comidaId": "cena_8_sandwich_pavo",
+      "nombre": "Sándwich Doble Pavo",
+      "tipo": "Cena",
+      "ingredientes": [
+        {
+          "alimentoId": "pan_integral",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "jamon_pavo",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "queso_panela",
+          "cantidadG": 30
+        }
+      ],
+      "notas": "Mucha lechuga, jitomate, cebolla y mostaza."
+    },
+    {
+      "comidaId": "cena_9_cereal_campeones",
+      "nombre": "Cereal de Campeones",
+      "tipo": "Cena",
+      "ingredientes": [
+        {
+          "alimentoId": "cereal_sin_azucar",
+          "cantidadG": 45
+        },
+        {
+          "alimentoId": "leche_light",
+          "cantidadG": 250
+        },
+        {
+          "alimentoId": "huevo_entero",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "Los 2 huevos van cocidos aparte con sal y limón."
+    },
+    {
+      "comidaId": "cena_10_burrito_limpiador",
+      "nombre": "Burrito Limpiador",
+      "tipo": "Cena",
+      "ingredientes": [
+        {
+          "alimentoId": "tortilla_maiz",
+          "cantidadG": 60
+        },
+        {
+          "alimentoId": "frijoles_olla",
+          "cantidadG": 50
+        },
+        {
+          "alimentoId": "huevo_entero",
+          "cantidadG": 100
+        }
+      ],
+      "notas": "Aprovecha sobras. En lugar de huevos, puedes poner pollo o picadillo sobrante."
+    }
+  ],
+  "planesDiarios": [
+    {
+      "planId": "plan_recomposicion_base",
+      "nombre": "Día Base de Recomposición",
+      "comidasIds": [
+        "desayuno_1_clasico_mexicano",
+        "comida_1_clasico_gym",
+        "cena_8_sandwich_pavo",
+        "cena_1_pre_entreno_clasico"
+      ]
+    }
+  ]
+}

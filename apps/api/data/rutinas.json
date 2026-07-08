@@ -1,0 +1,558 @@
+{
+  "rutina": {
+    "rutinaId": "rutina_recomposicion_5_dias",
+    "nombre": "Rutina de Recomposición (5 Días)",
+    "objetivo": "Hipertrofia",
+    "diasPorSemana": 5,
+    "notasGenerales": "El Día 5 está marcado como opcional en el nombre del día; se puede omitir según disponibilidad de tiempo.",
+    "dias": [
+      {
+        "diaId": "dia_1_hombros_triceps",
+        "orden": 1,
+        "nombreDia": "Día 1 - Hombros + Tríceps",
+        "enfoque": "hipertrofia",
+        "gruposMusculares": [
+          "hombros",
+          "tríceps",
+          "core"
+        ],
+        "ejercicios": [
+          {
+            "ejercicioId": "press_militar",
+            "orden": 1,
+            "series": 4,
+            "repsMin": 6,
+            "repsMax": 8,
+            "descansoSegundos": 120
+          },
+          {
+            "ejercicioId": "elevaciones_laterales",
+            "orden": 2,
+            "series": 4,
+            "repsMin": 12,
+            "repsMax": 15,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "elevaciones_posteriores",
+            "orden": 3,
+            "series": 4,
+            "repsMin": 12,
+            "repsMax": 15,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "press_mancuernas_sentado",
+            "orden": 4,
+            "series": 3,
+            "repsMin": 8,
+            "repsMax": 10,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "fondos",
+            "orden": 5,
+            "series": 3,
+            "repsMin": 10,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "extension_triceps_polea",
+            "orden": 6,
+            "series": 3,
+            "repsMin": 12,
+            "repsMax": 15,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "abdominales",
+            "orden": 7,
+            "series": 1,
+            "repsMin": 1,
+            "repsMax": 1,
+            "descansoSegundos": 0,
+            "notas": "10 minutos"
+          }
+        ]
+      },
+      {
+        "diaId": "dia_2_espalda_biceps",
+        "orden": 2,
+        "nombreDia": "Día 2 - Espalda + Bíceps",
+        "enfoque": "hipertrofia",
+        "gruposMusculares": [
+          "espalda",
+          "bíceps"
+        ],
+        "ejercicios": [
+          {
+            "ejercicioId": "dominadas",
+            "orden": 1,
+            "series": 4,
+            "repsMin": 8,
+            "repsMax": 10,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "remo_mancuerna_unilateral",
+            "orden": 2,
+            "series": 4,
+            "repsMin": 8,
+            "repsMax": 10,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "remo_maquina",
+            "orden": 3,
+            "series": 3,
+            "repsMin": 10,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "jalon_agarre_cerrado",
+            "orden": 4,
+            "series": 3,
+            "repsMin": 10,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "curl_barra",
+            "orden": 5,
+            "series": 3,
+            "repsMin": 8,
+            "repsMax": 10,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "curl_martillo",
+            "orden": 6,
+            "series": 3,
+            "repsMin": 10,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          }
+        ]
+      },
+      {
+        "diaId": "dia_3_pierna",
+        "orden": 3,
+        "nombreDia": "Día 3 - Pierna",
+        "enfoque": "hipertrofia",
+        "gruposMusculares": [
+          "piernas"
+        ],
+        "ejercicios": [
+          {
+            "ejercicioId": "sentadilla",
+            "orden": 1,
+            "series": 4,
+            "repsMin": 6,
+            "repsMax": 8,
+            "descansoSegundos": 120
+          },
+          {
+            "ejercicioId": "hip_thrust",
+            "orden": 2,
+            "series": 4,
+            "repsMin": 10,
+            "repsMax": 12,
+            "descansoSegundos": 120
+          },
+          {
+            "ejercicioId": "prensa_pierna",
+            "orden": 3,
+            "series": 4,
+            "repsMin": 10,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "peso_muerto_rumano",
+            "orden": 4,
+            "series": 4,
+            "repsMin": 8,
+            "repsMax": 10,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "curl_femoral",
+            "orden": 5,
+            "series": 3,
+            "repsMin": 12,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "extension_piernas",
+            "orden": 6,
+            "series": 3,
+            "repsMin": 12,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "elevacion_pantorrillas",
+            "orden": 7,
+            "series": 4,
+            "repsMin": 15,
+            "repsMax": 20,
+            "descansoSegundos": 90
+          }
+        ]
+      },
+      {
+        "diaId": "dia_4_pecho_hombros",
+        "orden": 4,
+        "nombreDia": "Día 4 - Pecho + Hombros",
+        "enfoque": "hipertrofia",
+        "gruposMusculares": [
+          "pecho",
+          "hombros"
+        ],
+        "ejercicios": [
+          {
+            "ejercicioId": "press_banca",
+            "orden": 1,
+            "series": 4,
+            "repsMin": 6,
+            "repsMax": 8,
+            "descansoSegundos": 120
+          },
+          {
+            "ejercicioId": "press_inclinado_mancuernas",
+            "orden": 2,
+            "series": 4,
+            "repsMin": 8,
+            "repsMax": 10,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "aperturas_maquina",
+            "orden": 3,
+            "series": 3,
+            "repsMin": 12,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "elevaciones_laterales",
+            "orden": 4,
+            "series": 4,
+            "repsMin": 12,
+            "repsMax": 15,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "face_pull",
+            "orden": 5,
+            "series": 3,
+            "repsMin": 15,
+            "repsMax": 15,
+            "descansoSegundos": 90
+          }
+        ]
+      },
+      {
+        "diaId": "dia_5_opcional_espalda_brazos",
+        "orden": 5,
+        "nombreDia": "Día 5 (Opcional) - Espalda + Brazos",
+        "enfoque": "hipertrofia",
+        "gruposMusculares": [
+          "espalda",
+          "bíceps",
+          "tríceps",
+          "core"
+        ],
+        "ejercicios": [
+          {
+            "ejercicioId": "jalon_pecho",
+            "orden": 1,
+            "series": 3,
+            "repsMin": 10,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "remo_mancuerna",
+            "orden": 2,
+            "series": 3,
+            "repsMin": 10,
+            "repsMax": 10,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "peso_muerto_convencional",
+            "orden": 3,
+            "series": 3,
+            "repsMin": 15,
+            "repsMax": 15,
+            "descansoSegundos": 120
+          },
+          {
+            "ejercicioId": "curl_predicador",
+            "orden": 4,
+            "series": 3,
+            "repsMin": 12,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "curl_polea",
+            "orden": 5,
+            "series": 3,
+            "repsMin": 12,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "jalon_frances_polea",
+            "orden": 6,
+            "series": 3,
+            "repsMin": 12,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "copa_mancuerna",
+            "orden": 7,
+            "series": 3,
+            "repsMin": 12,
+            "repsMax": 12,
+            "descansoSegundos": 90
+          },
+          {
+            "ejercicioId": "abdominales",
+            "orden": 8,
+            "series": 1,
+            "repsMin": 1,
+            "repsMax": 1,
+            "descansoSegundos": 0,
+            "notas": "10 minutos"
+          }
+        ]
+      }
+    ]
+  },
+  "bibliotecaEjercicios": [
+    {
+      "ejercicioId": "press_militar",
+      "nombre": "Press militar",
+      "grupoMuscularPrincipal": "hombros",
+      "equipo": "barra",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "elevaciones_laterales",
+      "nombre": "Elevaciones laterales",
+      "grupoMuscularPrincipal": "hombros",
+      "equipo": "mancuernas",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "elevaciones_posteriores",
+      "nombre": "Elevaciones posteriores (pájaro)",
+      "grupoMuscularPrincipal": "hombros",
+      "equipo": "mancuernas",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "press_mancuernas_sentado",
+      "nombre": "Press con mancuernas sentado",
+      "grupoMuscularPrincipal": "hombros",
+      "equipo": "mancuernas",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "fondos",
+      "nombre": "Fondos",
+      "grupoMuscularPrincipal": "tríceps",
+      "equipo": "peso corporal",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "extension_triceps_polea",
+      "nombre": "Extensión de tríceps en polea",
+      "grupoMuscularPrincipal": "tríceps",
+      "equipo": "polea",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "abdominales",
+      "nombre": "Abdominales",
+      "grupoMuscularPrincipal": "core",
+      "equipo": "peso corporal",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "dominadas",
+      "nombre": "Dominadas (o jalón al pecho)",
+      "grupoMuscularPrincipal": "espalda",
+      "equipo": "peso corporal",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "remo_mancuerna_unilateral",
+      "nombre": "Remo con mancuerna unilateral",
+      "grupoMuscularPrincipal": "espalda",
+      "equipo": "mancuernas",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "remo_maquina",
+      "nombre": "Remo en máquina",
+      "grupoMuscularPrincipal": "espalda",
+      "equipo": "máquina",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "jalon_agarre_cerrado",
+      "nombre": "Jalón con agarre cerrado",
+      "grupoMuscularPrincipal": "espalda",
+      "equipo": "polea",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "curl_barra",
+      "nombre": "Curl con barra",
+      "grupoMuscularPrincipal": "bíceps",
+      "equipo": "barra",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "curl_martillo",
+      "nombre": "Curl martillo",
+      "grupoMuscularPrincipal": "bíceps",
+      "equipo": "mancuernas",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "sentadilla",
+      "nombre": "Sentadilla",
+      "grupoMuscularPrincipal": "piernas",
+      "equipo": "barra",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "hip_thrust",
+      "nombre": "Hip thrust",
+      "grupoMuscularPrincipal": "piernas",
+      "equipo": "barra",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "prensa_pierna",
+      "nombre": "Prensa a una pierna",
+      "grupoMuscularPrincipal": "piernas",
+      "equipo": "máquina",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "peso_muerto_rumano",
+      "nombre": "Peso muerto rumano",
+      "grupoMuscularPrincipal": "piernas",
+      "equipo": "barra",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "curl_femoral",
+      "nombre": "Curl femoral",
+      "grupoMuscularPrincipal": "piernas",
+      "equipo": "máquina",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "extension_piernas",
+      "nombre": "Extensión de piernas",
+      "grupoMuscularPrincipal": "piernas",
+      "equipo": "máquina",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "elevacion_pantorrillas",
+      "nombre": "Elevación de pantorrillas",
+      "grupoMuscularPrincipal": "piernas",
+      "equipo": "máquina",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "press_banca",
+      "nombre": "Press de banca",
+      "grupoMuscularPrincipal": "pecho",
+      "equipo": "barra",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "press_inclinado_mancuernas",
+      "nombre": "Press inclinado con mancuernas",
+      "grupoMuscularPrincipal": "pecho",
+      "equipo": "mancuernas",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "aperturas_maquina",
+      "nombre": "Aperturas en máquina o polea",
+      "grupoMuscularPrincipal": "pecho",
+      "equipo": "máquina",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "face_pull",
+      "nombre": "Face pull",
+      "grupoMuscularPrincipal": "hombros",
+      "equipo": "polea",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "jalon_pecho",
+      "nombre": "Jalón al pecho",
+      "grupoMuscularPrincipal": "espalda",
+      "equipo": "polea",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "remo_mancuerna",
+      "nombre": "Remo con mancuerna",
+      "grupoMuscularPrincipal": "espalda",
+      "equipo": "mancuernas",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "peso_muerto_convencional",
+      "nombre": "Espalda baja o peso muerto convencional",
+      "grupoMuscularPrincipal": "espalda",
+      "equipo": "barra",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "curl_predicador",
+      "nombre": "Curl predicador",
+      "grupoMuscularPrincipal": "bíceps",
+      "equipo": "máquina",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "curl_polea",
+      "nombre": "Curl en polea",
+      "grupoMuscularPrincipal": "bíceps",
+      "equipo": "polea",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "jalon_frances_polea",
+      "nombre": "Extensión de tríceps por encima de la cabeza (jalón francés)",
+      "grupoMuscularPrincipal": "tríceps",
+      "equipo": "polea",
+      "videoUrl": null
+    },
+    {
+      "ejercicioId": "copa_mancuerna",
+      "nombre": "Copa con mancuerna o soga en polea baja",
+      "grupoMuscularPrincipal": "tríceps",
+      "equipo": "mancuernas",
+      "videoUrl": null
+    }
+  ]
+}

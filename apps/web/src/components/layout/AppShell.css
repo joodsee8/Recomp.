@@ -1,0 +1,122 @@
+.shell {
+  display: flex;
+  min-height: 100%;
+}
+
+.shell-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-4);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.shell-marca {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+  margin-bottom: var(--space-8);
+}
+.shell-marca-punto {
+  color: var(--color-proteina);
+}
+
+.shell-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.shell-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.shell-nav-link:hover {
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+}
+.shell-nav-link--activo {
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  box-shadow: inset 2px 0 0 var(--color-proteina);
+}
+
+.shell-nav-codigo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-faint);
+}
+
+.shell-usuario {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.shell-usuario-nombre {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.shell-usuario-salir {
+  background: none;
+  border: none;
+  color: var(--color-text-faint);
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0;
+}
+.shell-usuario-salir:hover {
+  color: var(--color-peligro);
+}
+
+.shell-contenido {
+  flex: 1;
+  padding: var(--space-6) var(--space-8);
+  max-width: 960px;
+}
+
+@media (max-width: 720px) {
+  .shell {
+    flex-direction: column;
+  }
+  .shell-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+  }
+  .shell-marca {
+    margin-bottom: 0;
+    margin-right: var(--space-5);
+  }
+  .shell-nav {
+    flex-direction: row;
+  }
+  .shell-usuario {
+    border-top: none;
+    padding-top: 0;
+    margin-left: auto;
+  }
+  .shell-contenido {
+    padding: var(--space-5);
+  }
+}

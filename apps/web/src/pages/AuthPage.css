@@ -1,0 +1,39 @@
+.auth-pagina {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+}
+
+.auth-tarjeta {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.auth-marca {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.auth-marca-punto {
+  color: var(--color-proteina);
+}
+
+.auth-alterno {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+.auth-alterno a {
+  color: var(--color-carbos);
+  font-weight: 600;
+  text-decoration: none;
+}
+.auth-alterno a:hover {
+  text-decoration: underline;
+}

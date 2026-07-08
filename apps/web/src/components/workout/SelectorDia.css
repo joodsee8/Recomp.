@@ -1,0 +1,44 @@
+.selector-dia {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.selector-dia-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-3);
+}
+
+.selector-dia-boton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: left;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+.selector-dia-boton:hover {
+  border-color: var(--color-proteina);
+}
+.selector-dia-boton:active {
+  transform: scale(0.99);
+}
+
+.selector-dia-nombre {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 0.95rem;
+}
+
+.selector-dia-grupos {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}

@@ -1,0 +1,68 @@
+/**
+ * tokens.css
+ * ----------
+ * Sistema de diseño de la app. Concepto: "sala de pesas / pizarra de gym",
+ * no un dashboard SaaS genérico. La paleta de macros toma prestado el
+ * código de colores real de los discos olímpicos (rojo=25kg, amarillo=15kg,
+ * azul=20kg) y lo remapea a los 3 macros que el usuario vigila a diario:
+ * proteína=rojo (el macro no-negociable), carbos=ámbar (combustible del
+ * entreno), grasa=azul (el que se recorta). Verde queda reservado para
+ * "vas bien" / récord personal — nunca se usa como macro.
+ *
+ * Tipografía: Oswald (condensada, industrial, para titulares y números
+ * grandes — evoca el rotulado de equipos de gimnasio) + Inter (UI/cuerpo,
+ * máxima legibilidad) + IBM Plex Mono (SOLO para datos numéricos: pesos,
+ * reps, macros — con tabular-nums las columnas de números alinean, que es
+ * justo lo que se necesita para comparar semana contra semana de un vistazo).
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Superficies */
+  --color-bg: #15171a;
+  --color-surface: #1d2024;
+  --color-surface-raised: #24282d;
+  --color-border: #2c3036;
+  --color-border-strong: #3a3f46;
+
+  /* Texto */
+  --color-text: #edeef0;
+  --color-text-muted: #8b9098;
+  --color-text-faint: #5c6167;
+
+  /* Macros (código de color de discos olímpicos) */
+  --color-proteina: #c23b3b;
+  --color-proteina-bg: rgba(194, 59, 59, 0.14);
+  --color-carbos: #d9a62e;
+  --color-carbos-bg: rgba(217, 166, 46, 0.14);
+  --color-grasa: #3e6fc2;
+  --color-grasa-bg: rgba(62, 111, 194, 0.14);
+
+  /* Estado */
+  --color-exito: #3c8c5c;
+  --color-exito-bg: rgba(60, 140, 92, 0.14);
+  --color-peligro: #c23b3b;
+  --color-peligro-bg: rgba(194, 59, 59, 0.14);
+
+  /* Tipografía */
+  --font-display: 'Oswald', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Espaciado */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+
+  /* Radios: deliberadamente chicos — nada de "pill buttons" suaves, esto
+     es una herramienta de taller, no una app de bienestar */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4);
+}

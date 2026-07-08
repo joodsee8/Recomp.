@@ -1,0 +1,55 @@
+.macro-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.macro-bar-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.macro-bar-etiqueta {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.macro-bar-valores {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.macro-bar-meta {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.macro-bar-pista {
+  display: flex;
+  gap: 2px;
+}
+
+.macro-bar-segmento {
+  flex: 1;
+  height: 14px;
+  background: var(--color-surface-raised);
+  border-radius: 1px;
+}
+
+.macro-bar-segmento--lleno.macro-bar-segmento--proteina {
+  background: var(--color-proteina);
+}
+.macro-bar-segmento--lleno.macro-bar-segmento--carbos {
+  background: var(--color-carbos);
+}
+.macro-bar-segmento--lleno.macro-bar-segmento--grasa {
+  background: var(--color-grasa);
+}
+.macro-bar-segmento--lleno.macro-bar-segmento--neutral {
+  background: var(--color-text-muted);
+}
+
+.macro-bar-exceso {
+  font-size: 0.75rem;
+  color: var(--color-peligro);
+}

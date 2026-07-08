@@ -1,0 +1,106 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.dashboard-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.dashboard-fecha {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.dashboard-hero {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+/* Anillo de progreso de calorías: conic-gradient controlado por la variable
+   --pct (0-100), sin librería de charts para algo tan simple. */
+.dashboard-hero-anillo {
+  --pct: 0;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(
+    var(--color-proteina) calc(var(--pct) * 1%),
+    var(--color-surface-raised) 0
+  );
+}
+.dashboard-hero-anillo::before {
+  content: '';
+  position: absolute;
+}
+.dashboard-hero-numero {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.dashboard-hero-consumido {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.dashboard-hero-etiqueta {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 0 var(--space-2);
+}
+
+.dashboard-hero-detalle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.dashboard-hero-restante {
+  font-size: 2.25rem;
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+.dashboard-hero-restante-etiqueta {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.dashboard-macros {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.dashboard-seccion-titulo {
+  margin-bottom: var(--space-4);
+}
+
+@media (max-width: 560px) {
+  .dashboard-encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  .dashboard-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+}
