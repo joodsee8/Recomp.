@@ -50,7 +50,7 @@ export const obtenerResumenDelDia = asyncHandler(async (req: Request, res: Respo
   const registroDelDia = await MacroLog.findOne({ userId, fecha });
 
   if (!registroDelDia) {
-    const metaVigente = await obtenerMetaCaloricaVigente(req.user?.id||'usuario_default');
+    const metaVigente = await obtenerMetaCaloricaVigente(userId);
     res.json({
       fecha: req.params.fecha,
       alimentosConsumidos: [],
