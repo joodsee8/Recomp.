@@ -1,0 +1,7 @@
+.fase-descanso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+}

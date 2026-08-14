@@ -1,0 +1,36 @@
+.fase-registrar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  max-width: 380px;
+  margin: 0 auto;
+  padding-top: var(--space-6);
+}
+
+.fase-registrar-progreso {
+  font-size: 0.75rem;
+  color: var(--color-text-faint);
+}
+
+.fase-registrar-inputs {
+  display: flex;
+  gap: var(--space-3);
+  width: 100%;
+}
+.fase-registrar-inputs .campo {
+  flex: 1;
+}
+.fase-registrar-inputs input {
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: var(--font-mono);
+  padding: var(--space-4) var(--space-2);
+}
+
+.fase-registrar-boton {
+  width: 100%;
+  padding: var(--space-4);
+  font-size: 1rem;
+}

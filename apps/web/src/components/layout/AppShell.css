@@ -22,6 +22,8 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--color-text);
+}
+.shell-sidebar .shell-marca {
   margin-bottom: var(--space-8);
 }
 .shell-marca-punto {
@@ -55,6 +57,10 @@
   background: var(--color-surface-raised);
   color: var(--color-text);
   box-shadow: inset 2px 0 0 var(--color-proteina);
+}
+
+.shell-nav-texto {
+  flex: 1;
 }
 
 .shell-nav-codigo {
@@ -91,32 +97,85 @@
   padding: var(--space-6) var(--space-8);
   max-width: 960px;
 }
+.shell-contenido--sin-padding {
+  padding: 0;
+  max-width: none;
+}
+
+/* --- Mobile: se ocultan por default, el media query de abajo las activa --- */
+.shell-topbar-movil,
+.shell-tabbar-movil {
+  display: none;
+}
 
 @media (max-width: 720px) {
   .shell {
     flex-direction: column;
+    height: 100dvh;
+    min-height: 100dvh;
   }
+
   .shell-sidebar {
-    width: 100%;
-    height: auto;
-    position: static;
-    flex-direction: row;
+    display: none;
+  }
+
+  .shell-topbar-movil {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+    flex-shrink: 0;
   }
-  .shell-marca {
-    margin-bottom: 0;
-    margin-right: var(--space-5);
+  .shell-topbar-movil-salir {
+    background: none;
+    border: none;
+    color: var(--color-text-faint);
+    font-size: 1.1rem;
+    line-height: 1;
   }
-  .shell-nav {
-    flex-direction: row;
+  .shell-topbar-movil-salir:hover {
+    color: var(--color-peligro);
   }
-  .shell-usuario {
-    border-top: none;
-    padding-top: 0;
-    margin-left: auto;
-  }
+
   .shell-contenido {
-    padding: var(--space-5);
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: var(--space-4);
+    max-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* El Chat maneja su propio scroll interno (mensajes vs. input fijo). */
+  .shell-contenido--sin-padding {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .shell-tabbar-movil {
+    display: flex;
+    flex-shrink: 0;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+    padding: var(--space-2) var(--space-2) calc(var(--space-2) + env(safe-area-inset-bottom));
+  }
+  .shell-tabbar-link {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: var(--color-text-faint);
+    text-decoration: none;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: var(--space-1) 0;
+  }
+  .shell-tabbar-link:hover {
+    color: var(--color-text);
+  }
+  .shell-tabbar-link--activo {
+    color: var(--color-proteina);
   }
 }

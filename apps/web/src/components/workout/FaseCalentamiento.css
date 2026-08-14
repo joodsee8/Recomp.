@@ -1,0 +1,52 @@
+.fase-calentamiento {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: var(--space-6);
+}
+
+.fase-calentamiento-cambiar-dia {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--color-text-faint);
+  font-size: 0.8rem;
+}
+.fase-calentamiento-cambiar-dia:hover {
+  color: var(--color-text);
+}
+
+.fase-calentamiento-etiqueta {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fase-calentamiento-lista {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fase-calentamiento-lista li {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.fase-calentamiento-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}

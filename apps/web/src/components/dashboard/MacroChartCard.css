@@ -1,0 +1,83 @@
+.macro-chart-card h3 {
+  margin-bottom: var(--space-4);
+}
+
+.macro-chart-card-cuerpo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.macro-chart-card-grafica {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  max-width: 200px;
+}
+
+.macro-chart-card-centro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+.macro-chart-card-kcal {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.macro-chart-card-kcal-etiqueta {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+}
+
+.macro-chart-card-info {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+.macro-chart-card-info li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.85rem;
+}
+
+.macro-chart-card-punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.macro-chart-card-info-nombre {
+  color: var(--color-text-muted);
+  min-width: 90px;
+}
+
+.macro-chart-card-info-pct {
+  font-weight: 600;
+}
+
+.macro-chart-card-nota {
+  margin-top: var(--space-4);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .macro-chart-card-cuerpo {
+    flex-direction: column;
+  }
+  .macro-chart-card-info {
+    width: 100%;
+  }
+}

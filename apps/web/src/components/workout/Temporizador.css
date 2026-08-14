@@ -1,0 +1,44 @@
+.temporizador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.temporizador-anillo {
+  --pct: 0;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(var(--color-carbos) calc(var(--pct) * 1%), var(--color-surface-raised) 0);
+  transition: background 1s linear;
+}
+.temporizador-anillo::after {
+  content: '';
+  position: absolute;
+}
+.temporizador-tiempo {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.temporizador-etiqueta {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.temporizador-saltar {
+  font-size: 0.75rem;
+  padding: var(--space-2) var(--space-3);
+}

@@ -1,0 +1,57 @@
+.fase-inicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
+  padding-top: var(--space-6);
+}
+
+.fase-inicio-progreso {
+  font-size: 0.75rem;
+  color: var(--color-text-faint);
+}
+
+.fase-inicio-notas {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.fase-inicio-metricas {
+  display: flex;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.fase-inicio-metrica {
+  flex: 1;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.fase-inicio-metrica-valor {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.fase-inicio-metrica-etiqueta {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fase-inicio-boton {
+  width: 100%;
+  padding: var(--space-4);
+  font-size: 1rem;
+  margin-top: var(--space-3);
+}

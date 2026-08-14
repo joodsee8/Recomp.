@@ -1,0 +1,40 @@
+.burbuja-fila {
+  display: flex;
+  justify-content: flex-start;
+}
+.burbuja-fila--usuario {
+  justify-content: flex-end;
+}
+
+.burbuja {
+  max-width: 78%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.burbuja--ia {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-bottom-left-radius: 2px;
+}
+
+.burbuja--usuario {
+  background: var(--color-proteina);
+  color: #fff;
+  border-bottom-right-radius: 2px;
+}
+
+.burbuja p {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.burbuja-hora {
+  font-size: 0.65rem;
+  opacity: 0.6;
+  align-self: flex-end;
+}

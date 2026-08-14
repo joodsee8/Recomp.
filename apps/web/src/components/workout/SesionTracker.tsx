@@ -1,26 +1,13 @@
 import { useState } from 'react';
 import type { DiaDeRutinaResuelto, EjercicioRegistrado } from '../../types/api';
 import * as workoutLogsService from '../../services/workoutLogs.service';
-import { SerieInputRow } from './SerieInputRow';
+import type { EstadoEjercicio, FaseSesion } from './tiposSesion';
+import { FaseCalentamiento } from './FaseCalentamiento';
+import { FaseInicioEjercicio } from './FaseInicioEjercicio';
+import { FaseRegistrarSerie } from './FaseRegistrarSerie';
+import { FaseDescanso } from './FaseDescanso';
+import { FaseResumen } from './FaseResumen';
 import './SesionTracker.css';
-
-interface EstadoSerie {
-  numeroSerie: number;
-  pesoKg: string;
-  repsLogradas: string;
-  completada: boolean;
-  esRecordPersonal?: boolean;
-}
-
-interface EstadoEjercicio {
-  ejercicioId: string;
-  nombreEjercicio: string;
-  repsMin: number;
-  repsMax: number;
-  descansoSegundos: number;
-  notas?: string;
-  series: EstadoSerie[];
-}
 
 function fechaDeHoy(): string {
   return new Date().toISOString().slice(0, 10);
@@ -43,43 +30,42 @@ function construirEstadoInicial(dia: DiaDeRutinaResuelto): EstadoEjercicio[] {
   }));
 }
 
+/** Devuelve una copia del array de ejercicios con una serie puntual actualizada, sin mutar el original. */
+function conSerieActualizada(
+  ejercicios: EstadoEjercicio[],
+  indiceEjercicio: number,
+  indiceSerie: number,
+  pesoKg: number,
+  reps: number
+): EstadoEjercicio[] {
+  return ejercicios.map((ej, i) =>
+    i !== indiceEjercicio
+      ? ej
+      : {
+          ...ej,
+          series: ej.series.map((s, j) =>
+            j !== indiceSerie ? s : { ...s, pesoKg: String(pesoKg), repsLogradas: String(reps), completada: true }
+          )
+        }
+  );
+}
+
 interface Props {
   dia: DiaDeRutinaResuelto;
   onSesionGuardada: () => void;
+  onCambiarDia?: () => void;
 }
 
-export function SesionTracker({ dia, onSesionGuardada }: Props) {
+export function SesionTracker({ dia, onSesionGuardada, onCambiarDia }: Props) {
+  const [fase, setFase] = useState<FaseSesion>({ tipo: 'calentamiento' });
   const [ejercicios, setEjercicios] = useState<EstadoEjercicio[]>(() => construirEstadoInicial(dia));
-  const [guardando, setGuardando] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [guardada, setGuardada] = useState(false);
 
-  function actualizarSerie(
-    indiceEjercicio: number,
-    indiceSerie: number,
-    cambios: Partial<EstadoSerie>
-  ) {
-    setEjercicios((prev) =>
-      prev.map((ej, i) =>
-        i !== indiceEjercicio
-          ? ej
-          : { ...ej, series: ej.series.map((s, j) => (j !== indiceSerie ? s : { ...s, ...cambios })) }
-      )
-    );
-  }
-
-  async function guardarSesion() {
+  async function guardarSesion(ejerciciosFinales: EstadoEjercicio[]) {
+    setFase({ tipo: 'guardando' });
     setError(null);
 
-    const seriesIncompletas = ejercicios.some((ej) =>
-      ej.series.some((s) => s.completada && (!s.pesoKg || Number(s.pesoKg) <= 0))
-    );
-    if (seriesIncompletas) {
-      setError('Hay series marcadas como completadas sin peso registrado. Ponle el peso o desmárcalas.');
-      return;
-    }
-
-    const ejerciciosRegistrados: EjercicioRegistrado[] = ejercicios.map((ej) => ({
+    const ejerciciosRegistrados: EjercicioRegistrado[] = ejerciciosFinales.map((ej) => ({
       ejercicioId: ej.ejercicioId,
       nombreEjercicio: ej.nombreEjercicio,
       notas: ej.notas,
@@ -91,7 +77,6 @@ export function SesionTracker({ dia, onSesionGuardada }: Props) {
       }))
     }));
 
-    setGuardando(true);
     try {
       const { sesion } = await workoutLogsService.crearSesion({
         fecha: fechaDeHoy(),
@@ -100,74 +85,118 @@ export function SesionTracker({ dia, onSesionGuardada }: Props) {
         ejerciciosRegistrados
       });
 
-      // Refleja los esRecordPersonal calculados por el backend en el estado
-      // local, para pintar el sello PR sin recargar toda la pantalla.
+      // Refleja los esRecordPersonal calculados por el backend en el estado local.
       setEjercicios((prev) =>
-        prev.map((ej, i) => {
-          const guardado = sesion.ejerciciosRegistrados[i];
-          return {
-            ...ej,
-            series: ej.series.map((s, j) => ({ ...s, esRecordPersonal: guardado?.series[j]?.esRecordPersonal }))
-          };
-        })
+        prev.map((ej, i) => ({
+          ...ej,
+          series: ej.series.map((s, j) => ({
+            ...s,
+            esRecordPersonal: sesion.ejerciciosRegistrados[i]?.series[j]?.esRecordPersonal
+          }))
+        }))
       );
-      setGuardada(true);
+      setFase({ tipo: 'resumen' });
       onSesionGuardada();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'No se pudo guardar la sesión');
-    } finally {
-      setGuardando(false);
+      setFase({ tipo: 'inicio_ejercicio', indiceEjercicio: ejerciciosFinales.length - 1 });
     }
   }
 
+  function registrarSerie(indiceEjercicio: number, indiceSerie: number, pesoKg: number, reps: number) {
+    const actualizados = conSerieActualizada(ejercicios, indiceEjercicio, indiceSerie, pesoKg, reps);
+    setEjercicios(actualizados);
+
+    const esUltimaSerieDelEjercicio = indiceSerie + 1 >= actualizados[indiceEjercicio].series.length;
+    const esUltimoEjercicio = indiceEjercicio + 1 >= actualizados.length;
+
+    if (!esUltimaSerieDelEjercicio) {
+      setFase({ tipo: 'descanso_serie', indiceEjercicio, indiceSerieSiguiente: indiceSerie + 1 });
+    } else if (!esUltimoEjercicio) {
+      setFase({ tipo: 'descanso_ejercicio', indiceEjercicioSiguiente: indiceEjercicio + 1 });
+    } else {
+      guardarSesion(actualizados);
+    }
+  }
+
+  if (fase.tipo === 'calentamiento') {
+    return (
+      <FaseCalentamiento
+        onContinuar={() => setFase({ tipo: 'inicio_ejercicio', indiceEjercicio: 0 })}
+        onCambiarDia={onCambiarDia}
+      />
+    );
+  }
+
+  if (fase.tipo === 'inicio_ejercicio') {
+    const ej = ejercicios[fase.indiceEjercicio];
+    return (
+      <>
+        {error && <p className="error-mensaje">{error}</p>}
+        <FaseInicioEjercicio
+          nombreEjercicio={ej.nombreEjercicio}
+          numeroEjercicio={fase.indiceEjercicio + 1}
+          totalEjercicios={ejercicios.length}
+          series={ej.series.length}
+          repsMin={ej.repsMin}
+          repsMax={ej.repsMax}
+          descansoSegundos={ej.descansoSegundos}
+          notas={ej.notas}
+          onComenzar={() => setFase({ tipo: 'registrar_serie', indiceEjercicio: fase.indiceEjercicio, indiceSerie: 0 })}
+        />
+      </>
+    );
+  }
+
+  if (fase.tipo === 'registrar_serie') {
+    const ej = ejercicios[fase.indiceEjercicio];
+    return (
+      <FaseRegistrarSerie
+        nombreEjercicio={ej.nombreEjercicio}
+        numeroSerie={fase.indiceSerie + 1}
+        totalSeries={ej.series.length}
+        repsSugeridas={ej.repsMax}
+        onRegistrar={(peso, reps) => registrarSerie(fase.indiceEjercicio, fase.indiceSerie, peso, reps)}
+      />
+    );
+  }
+
+  if (fase.tipo === 'descanso_serie') {
+    const ej = ejercicios[fase.indiceEjercicio];
+    return (
+      <FaseDescanso
+        segundos={ej.descansoSegundos}
+        etiqueta="Descanso entre series"
+        onFinalizar={() =>
+          setFase({ tipo: 'registrar_serie', indiceEjercicio: fase.indiceEjercicio, indiceSerie: fase.indiceSerieSiguiente })
+        }
+      />
+    );
+  }
+
+  if (fase.tipo === 'descanso_ejercicio') {
+    const ejAnterior = ejercicios[fase.indiceEjercicioSiguiente - 1];
+    return (
+      <FaseDescanso
+        segundos={ejAnterior.descansoSegundos}
+        etiqueta="Descanso antes del siguiente ejercicio"
+        onFinalizar={() => setFase({ tipo: 'inicio_ejercicio', indiceEjercicio: fase.indiceEjercicioSiguiente })}
+      />
+    );
+  }
+
+  if (fase.tipo === 'guardando') {
+    return <div className="estado-vacio">Guardando sesión…</div>;
+  }
+
   return (
-    <div className="sesion-tracker">
-      <header className="sesion-tracker-encabezado">
-        <div>
-          <h1>{dia.nombreDia}</h1>
-          {dia.gruposMusculares.length > 0 && <h2>{dia.gruposMusculares.join(' · ')}</h2>}
-        </div>
-        {guardada && <span className="sesion-tracker-guardada">Sesión guardada</span>}
-      </header>
-
-      <div className="sesion-tracker-lista">
-        {ejercicios.map((ej, indiceEjercicio) => (
-          <div key={ej.ejercicioId} className="tarjeta sesion-tracker-ejercicio">
-            <div className="sesion-tracker-ejercicio-encabezado">
-              <h3>{ej.nombreEjercicio}</h3>
-              <span className="sesion-tracker-objetivo dato-numerico">
-                objetivo: {ej.repsMin}–{ej.repsMax} reps · descanso {ej.descansoSegundos}s
-              </span>
-            </div>
-            {ej.notas && <p className="sesion-tracker-notas">{ej.notas}</p>}
-
-            <div className="sesion-tracker-series">
-              {ej.series.map((serie, indiceSerie) => (
-                <SerieInputRow
-                  key={serie.numeroSerie}
-                  numeroSerie={serie.numeroSerie}
-                  pesoKg={serie.pesoKg}
-                  repsLogradas={serie.repsLogradas}
-                  completada={serie.completada}
-                  soloLectura={guardada}
-                  esRecordPersonal={serie.esRecordPersonal}
-                  onCambiarPeso={(v) => actualizarSerie(indiceEjercicio, indiceSerie, { pesoKg: v })}
-                  onCambiarReps={(v) => actualizarSerie(indiceEjercicio, indiceSerie, { repsLogradas: v })}
-                  onCambiarCompletada={(v) => actualizarSerie(indiceEjercicio, indiceSerie, { completada: v })}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {error && <p className="error-mensaje">{error}</p>}
-
-      {!guardada && (
-        <button className="boton boton-primario sesion-tracker-guardar" onClick={guardarSesion} disabled={guardando}>
-          {guardando ? 'Guardando…' : 'Guardar sesión'}
-        </button>
-      )}
-    </div>
+    <FaseResumen
+      nombreDia={dia.nombreDia}
+      ejercicios={ejercicios}
+      onNuevaSesion={() => {
+        setEjercicios(construirEstadoInicial(dia));
+        setFase({ tipo: 'calentamiento' });
+      }}
+    />
   );
 }

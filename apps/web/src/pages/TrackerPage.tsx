@@ -16,13 +16,7 @@ export function TrackerPage() {
           <SelectorDia onDiaListo={setDia} />
         </div>
       ) : (
-        <SesionTracker dia={dia} onSesionGuardada={() => {}} />
-      )}
-
-      {dia && (
-        <button className="boton" style={{ marginTop: '1.5rem' }} onClick={() => setDia(null)}>
-          ← Elegir otro día
-        </button>
+        <SesionTracker dia={dia} onSesionGuardada={() => {}} onCambiarDia={() => setDia(null)} />
       )}
     </AppShell>
   );
