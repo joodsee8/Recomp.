@@ -1,0 +1,81 @@
+.logro-card {
+  display: flex;
+  gap: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.logro-card--desbloqueado {
+  border-color: var(--color-carbos);
+  background: linear-gradient(135deg, var(--color-carbos-bg), var(--color-surface) 60%);
+}
+
+.logro-card-cuerpo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.logro-card-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.logro-card-titulo {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.logro-card-periodo {
+  font-size: 0.65rem;
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.logro-card-descripcion {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.logro-card-check {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-exito);
+}
+
+.logro-card-progreso {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.logro-card-progreso-pista {
+  flex: 1;
+  height: 6px;
+  background: var(--color-surface-raised);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.logro-card-progreso-relleno {
+  height: 100%;
+  background: var(--color-carbos);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.logro-card-progreso-texto {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}

@@ -1,0 +1,84 @@
+.logros-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+}
+
+.logros-ventana {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 640px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.logros-ventana-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.logros-ventana-cerrar {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  padding: var(--space-2);
+}
+.logros-ventana-cerrar:hover {
+  color: var(--color-text);
+}
+
+.logros-ventana-contenido {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.logros-ventana-seccion h2 {
+  margin-bottom: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.logros-ventana-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.logros-ventana-footer {
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+.logros-ventana-footer .boton {
+  width: 100%;
+}
+
+@media (max-width: 560px) {
+  .logros-overlay {
+    padding: 0;
+  }
+  .logros-ventana {
+    max-width: none;
+    max-height: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+  }
+}

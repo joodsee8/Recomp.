@@ -6,6 +6,8 @@ import alimentoRoutes from './alimento.routes';
 import comidaRoutes from './comida.routes';
 import workoutLogRoutes from './workoutLog.routes';
 import macroLogRoutes from './macroLog.routes';
+import logroRoutes from './logro.routes';
+import chatRoutes from './chat.routes';
 
 const router = Router();
 
@@ -16,5 +18,7 @@ router.use('/alimentos', alimentoRoutes);
 router.use('/comidas', comidaRoutes);
 router.use('/workout-logs', workoutLogRoutes);
 router.use('/macro-logs', macroLogRoutes);
+router.use('/logros', logroRoutes);
+router.use('/chat', chatRoutes);
 
 export default router;

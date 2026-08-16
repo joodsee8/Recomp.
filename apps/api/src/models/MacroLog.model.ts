@@ -33,7 +33,7 @@ export interface IMacroLog extends Document {
   userId: Types.ObjectId;
   fecha: Date;
   metaDelDia: IMacros;
-  alimentosConsumidos: IAlimentoConsumido[];
+  alimentosConsumidos: Types.DocumentArray<IAlimentoConsumido>;
   totalesConsumidos: IMacros;
   createdAt: Date;
   updatedAt: Date;
