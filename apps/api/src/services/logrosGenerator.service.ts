@@ -7,6 +7,8 @@ import { generarJSON } from './gemini.service';
 import { calcularLimitesPeriodo } from './logrosEvaluator.service';
 import { AppError } from '../utils/AppError';
 import { Types } from 'mongoose';
+import { METRICAS_LOGROS, esMetricaValida, MetricaLogro } from '../data/metricasLogros';
+
 /**
  * logrosGenerator.service.ts
  * ---------------------------
@@ -130,7 +132,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
   categoria: 'dieta' | 'ejercicio' | 'mixto';
   periodo: 'diario' | 'semanal' | 'mensual';
   icono: string;
-  metrica: string;
+  metrica: MetricaLogro;
   comparador: '>=' | '=';
   objetivo: number;
 } | null {
