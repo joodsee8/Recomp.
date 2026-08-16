@@ -2,7 +2,6 @@ import { WorkoutLog } from '../models/WorkoutLog.model';
 import { MacroLog } from '../models/MacroLog.model';
 import { Logro, ILogro } from '../models/Logro.model';
 import { ICONOS_LOGROS, esIconoValido } from '../data/iconosLogros';
-import { METRICAS_LOGROS, esMetricaValida } from '../data/metricasLogros';
 import { generarJSON } from './gemini.service';
 import { calcularLimitesPeriodo } from './logrosEvaluator.service';
 import { AppError } from '../utils/AppError';
