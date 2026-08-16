@@ -6,7 +6,7 @@ import { METRICAS_LOGROS, esMetricaValida } from '../data/metricasLogros';
 import { generarJSON } from './gemini.service';
 import { calcularLimitesPeriodo } from './logrosEvaluator.service';
 import { AppError } from '../utils/AppError';
-
+import { Types } from 'mongoose';
 /**
  * logrosGenerator.service.ts
  * ---------------------------
@@ -165,6 +165,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
  * activos (defensa extra además de pedírselo a Gemini en el prompt).
  */
 export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
+  const userObjectId = new Types.ObjectId(userId);
   const [resumenHistorial, logrosActivos] = await Promise.all([
     construirResumenHistorial(userId),
     Logro.find({ userId, desbloqueado: false, fechaFinPeriodo: { $gte: new Date() } }).select('titulo')
@@ -192,7 +193,7 @@ export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
     const { inicio, fin } = calcularLimitesPeriodo(validado.periodo);
 
     logrosAInsertar.push({
-      userId,
+      userId: userObjectId,
       titulo: validado.titulo,
       descripcion: validado.descripcion,
       categoria: validado.categoria,
