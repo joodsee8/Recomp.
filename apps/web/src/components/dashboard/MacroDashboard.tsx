@@ -4,6 +4,7 @@ import * as macroLogsService from '../../services/macroLogs.service';
 import { MacroChartCard } from './MacroChartCard';
 import { ProgresoMuscularCard } from './ProgresoMuscularCard';
 import { ProyeccionCard } from './ProyeccionCard';
+import { LogrosVentana } from '../achievements/LogrosVentana';
 import './MacroDashboard.css';
 
 function fechaDeHoy(): string {
@@ -15,13 +16,16 @@ function fechaDeHoy(): string {
  * --------------
  * Solo gráficas + su información — nada de formularios ni listas. Registrar
  * comida y entrenamiento pasa por el Chat (home) y el Tracker; el Dashboard
- * es puramente de lectura/analítica.
+ * es puramente de lectura/analítica. Los Logros viven en su propia ventana
+ * dedicada (modal), disparada desde acá, para no meterle otra "tarjeta" más
+ * al dashboard de gráficas.
  */
 export function MacroDashboard() {
   const [fecha, setFecha] = useState(fechaDeHoy());
   const [resumen, setResumen] = useState<ResumenDelDia | null>(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [mostrarLogros, setMostrarLogros] = useState(false);
 
   const cargarResumen = useCallback(async (fechaConsulta: string) => {
     setCargando(true);
@@ -47,13 +51,18 @@ export function MacroDashboard() {
           <h1>Dashboard</h1>
           <h2>Tus analíticas</h2>
         </div>
-        <input
-          type="date"
-          className="dashboard-fecha"
-          value={fecha}
-          max={fechaDeHoy()}
-          onChange={(e) => setFecha(e.target.value)}
-        />
+        <div className="dashboard-encabezado-acciones">
+          <button className="boton dashboard-boton-logros" onClick={() => setMostrarLogros(true)}>
+            🏆 Logros
+          </button>
+          <input
+            type="date"
+            className="dashboard-fecha"
+            value={fecha}
+            max={fechaDeHoy()}
+            onChange={(e) => setFecha(e.target.value)}
+          />
+        </div>
       </header>
 
       {cargando && !resumen && <div className="estado-vacio">Cargando…</div>}
@@ -63,6 +72,8 @@ export function MacroDashboard() {
       <ProgresoMuscularCard />
 
       <ProyeccionCard />
+
+      {mostrarLogros && <LogrosVentana onCerrar={() => setMostrarLogros(false)} />}
     </div>
   );
 }

@@ -184,3 +184,47 @@ export interface ResumenDelDia {
   restante: Macros;
   porcentajeCumplido: PorcentajeCumplido;
 }
+
+// ---------- Logros ----------
+
+export type PeriodoLogro = 'diario' | 'semanal' | 'mensual';
+export type CategoriaLogro = 'dieta' | 'ejercicio' | 'mixto';
+
+export interface CriterioLogro {
+  metrica: string;
+  comparador: '>=' | '=';
+  objetivo: number;
+}
+
+export interface Logro {
+  _id: string;
+  titulo: string;
+  descripcion: string;
+  categoria: CategoriaLogro;
+  periodo: PeriodoLogro;
+  icono: string;
+  criterio: CriterioLogro;
+  progresoActual: number;
+  metaObjetivo: number;
+  desbloqueado: boolean;
+  fechaDesbloqueo?: string;
+  fechaInicioPeriodo: string;
+  fechaFinPeriodo: string;
+}
+
+export interface RespuestaLogros {
+  activos: Logro[];
+  desbloqueados: Logro[];
+}
+
+// ---------- Chat ----------
+
+export interface MensajeChatBody {
+  autor: 'usuario' | 'ia';
+  texto: string;
+}
+
+export interface RespuestaChat {
+  mensaje: string;
+}
+

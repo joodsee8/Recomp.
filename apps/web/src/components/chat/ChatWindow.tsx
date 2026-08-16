@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { MensajeBurbuja, type Mensaje } from './MensajeBurbuja';
 import { IndicadorEscribiendo } from './IndicadorEscribiendo';
 import { ChatInput } from './ChatInput';
+import * as chatService from '../../services/chat.service';
+import { ApiError } from '../../services/apiClient';
 import './ChatWindow.css';
 
 function horaActual(): string {
@@ -11,17 +13,13 @@ function horaActual(): string {
 const MENSAJE_BIENVENIDA: Mensaje = {
   id: 'bienvenida',
   autor: 'ia',
-  texto:
-    'Hola 👋 Todavía estoy en construcción — por ahora solo puedo mostrarte cómo se va a ver esto. Pronto vas a poder registrar comida, pesos y series solo platicando conmigo.',
+  texto: 'Hola 👋 Cuéntame qué comiste, cómo te fue en el entreno, o pregúntame cómo vas hoy.',
   hora: horaActual()
 };
 
-/**
- * Respuesta simulada, SOLO para que la interfaz se sienta completa mientras
- * se conecta la lógica real de IA. No interpreta el mensaje del usuario.
- */
-const RESPUESTA_PLACEHOLDER =
-  'Por ahora esto es solo la interfaz — todavía no proceso lo que me escribes. Cuando esté conectada la lógica real, voy a poder registrar esto directo en tu Dashboard.';
+// Historial que se le manda a la API en cada mensaje: solo autor+texto, sin
+// los campos de UI (id, hora) que el backend no necesita.
+const MAXIMO_HISTORIAL_ENVIADO = 8;
 
 export function ChatWindow() {
   const [mensajes, setMensajes] = useState<Mensaje[]>([MENSAJE_BIENVENIDA]);
@@ -32,19 +30,27 @@ export function ChatWindow() {
     finRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [mensajes, escribiendo]);
 
-  function enviarMensaje(texto: string) {
+  async function enviarMensaje(texto: string) {
     const mensajeUsuario: Mensaje = { id: crypto.randomUUID(), autor: 'usuario', texto, hora: horaActual() };
+    const historialParaAPI = [...mensajes, mensajeUsuario]
+      .slice(-MAXIMO_HISTORIAL_ENVIADO)
+      .map((m) => ({ autor: m.autor, texto: m.texto }));
+
     setMensajes((prev) => [...prev, mensajeUsuario]);
     setEscribiendo(true);
 
-    // Simulación de respuesta — reemplazar por la llamada real al backend de IA.
-    setTimeout(() => {
+    try {
+      const { mensaje: respuesta } = await chatService.enviarMensaje(texto, historialParaAPI);
+      setMensajes((prev) => [...prev, { id: crypto.randomUUID(), autor: 'ia', texto: respuesta, hora: horaActual() }]);
+    } catch (e) {
+      const esFaltaDeAPIKey = e instanceof ApiError && e.statusCode === 503;
+      const textoError = esFaltaDeAPIKey
+        ? 'Todavía no tengo configurada mi conexión con Gemini (falta GEMINI_API_KEY en el servidor) — avísale a quien administra la app.'
+        : 'Se me cayó la conexión justo ahora. ¿Puedes intentar de nuevo?';
+      setMensajes((prev) => [...prev, { id: crypto.randomUUID(), autor: 'ia', texto: textoError, hora: horaActual() }]);
+    } finally {
       setEscribiendo(false);
-      setMensajes((prev) => [
-        ...prev,
-        { id: crypto.randomUUID(), autor: 'ia', texto: RESPUESTA_PLACEHOLDER, hora: horaActual() }
-      ]);
-    }, 1100);
+    }
   }
 
   return (
