@@ -26,7 +26,7 @@ const EjercicioSchema = new Schema<IEjercicio>(
     ejercicioId: {
       type: String,
       required: true,
-      unique: true, // garantiza a nivel de índice que no se dupliquen ejercicios en re-seeds parciales o inserciones manuales
+      unique: true,
       trim: true,
       lowercase: true
     },

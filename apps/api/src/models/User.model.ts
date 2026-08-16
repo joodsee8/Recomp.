@@ -4,10 +4,7 @@ import { Schema, model, Document } from 'mongoose';
  * User
  * ----
  * Modelo mínimo de usuario para poder emitir JWT y scopear WorkoutLog/
- * MacroLog por userId. No guarda perfil de fitness (peso, % grasa, meta
- * calórica personalizada) todavía — eso es la evolución natural cuando se
- * quiera reemplazar el placeholder de metaCalorica en dieta.json por una
- * meta calórica propia por usuario (ver nota en macroLog.controller.ts).
+ * MacroLog por userId.
  */
 
 export interface IUser extends Document {

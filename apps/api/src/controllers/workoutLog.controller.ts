@@ -3,13 +3,6 @@ import { WorkoutLog, IEjercicioRegistrado } from '../models/WorkoutLog.model';
 import { asyncHandler } from '../utils/asyncHandler';
 import { AppError } from '../utils/AppError';
 
-/**
- * Antes de guardar la sesión, marca esRecordPersonal en cada serie completada
- * que supere el peso máximo que el usuario haya levantado antes en ese
- * ejercicio (comparando contra TODAS las sesiones previas ya guardadas, no
- * contra la sesión que se está creando). El campo ya existía en el schema
- * sin usarse — acá se calcula de verdad.
- */
 async function marcarRecordsPersonales(
   userId: string,
   ejerciciosRegistrados: IEjercicioRegistrado[]
@@ -47,7 +40,6 @@ async function marcarRecordsPersonales(
   });
 }
 
-/** POST /api/workout-logs — guarda una sesión completa del Tracker */
 export const crearSesion = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.userId as string;
   const { fecha, diaRutinaId, nombreDia, ejerciciosRegistrados, duracionMinutos, notasSesion, completado } =
@@ -81,10 +73,6 @@ export const crearSesion = asyncHandler(async (req: Request, res: Response) => {
   res.status(201).json({ sesion });
 });
 
-/**
- * GET /api/workout-logs?diaRutinaId=torso_pesado&desde=2026-06-01&hasta=2026-07-01&page=1&limit=20
- * Historial paginado, lo más reciente primero.
- */
 export const listarHistorial = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.userId as string;
   const { diaRutinaId, desde, hasta, limit, page } = req.query as Record<string, string | undefined>;
@@ -120,7 +108,6 @@ export const listarHistorial = asyncHandler(async (req: Request, res: Response) 
   });
 });
 
-/** GET /api/workout-logs/:id — una sesión puntual (siempre scopeada al dueño) */
 export const obtenerSesion = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.userId as string;
   const sesion = await WorkoutLog.findOne({ _id: req.params.id, userId });
@@ -132,17 +119,6 @@ export const obtenerSesion = asyncHandler(async (req: Request, res: Response) =>
   res.json({ sesion });
 });
 
-/**
- * GET /api/workout-logs/progreso/:ejercicioId
- * ---------------------------------------------
- * Serie temporal: por cada sesión donde aparece ese ejercicio, el peso
- * máximo levantado, las reps logradas en ese peso, el volumen total
- * (peso × reps sumado de todas las series) y si hubo PR ese día. Es el dato
- * que alimenta el gráfico de sobrecarga progresiva del Historial.
- *
- * IMPORTANTE: esta ruta debe registrarse ANTES de "/:id" en el router, o
- * Express interpretaría "progreso" como el parámetro :id.
- */
 export const obtenerProgresoEjercicio = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.userId as string;
   const { ejercicioId } = req.params;

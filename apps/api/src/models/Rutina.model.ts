@@ -3,28 +3,20 @@ import { Schema, model, Document } from 'mongoose';
 /**
  * Rutina
  * ------
- * Guarda cada PROGRAMA completo (un elemento del array "rutinas" de
- * rutinas.json), con dias -> ejercicios embebidos como subdocumentos.
+ * Guarda el PROGRAMA completo (la clave "rutina" de rutinas.json), con
+ * dias -> ejercicios embebidos como subdocumentos.
  *
- * v2 — revisado contra el rutinas.json REAL del usuario (2026-07-02):
- * la v1 de este modelo exigía un array `series[]` con RIR y tipo de serie
- * (calentamiento/trabajo) por cada set individual. Esa granularidad era
- * inventada para el JSON de ejemplo, pero el programa real del usuario
- * prescribe series de forma homogénea por ejercicio (ej. "4 series de 6-8
- * reps"), sin RIR ni distinción de calentamiento por set. Se simplifica el
- * modelo para reflejar la prescripción real en vez de forzar datos
- * fabricados. Esto NO afecta a WorkoutLog: el registro de lo que el usuario
- * realmente levanta sigue siendo serie por serie, con peso y reps exactos —
- * la sobrecarga progresiva se mide ahí, no en la prescripción.
+ * v2: el schema de cada ejercicio-en-día es un passthrough casi directo de
+ * los campos reales del usuario (series como NÚMERO de sets prescritos,
+ * repsMin/repsMax, descansoSegundos) — se descartó a propósito la idea de
+ * expandir "series" en un array de sets individuales con RIR por set,
+ * porque la rutina real del usuario prescribe series de forma homogénea
+ * (ej. "4 series de 6-8 reps") sin distinguir calentamiento/RIR por set.
+ * Meter eso en un array hubiera obligado a inventar datos que no existen.
  *
- * Misma decisión de diseño que en WorkoutLog: días y ejercicios se leen y
- * escriben siempre juntos como un solo programa, así que embeber evita
- * populates innecesarios y permite pedir "dame el Día 3 - Pierna completo"
- * en una sola query.
- *
- * `ejercicioId` dentro de cada ejercicio de rutina es una referencia LÓGICA
- * (no un ObjectId con `ref`) al catálogo Ejercicio. Se resuelve en el
- * service/controller cuando el frontend necesita nombre/grupo muscular.
+ * diaSemanaSugerido, enfoque y gruposMusculares son opcionales: el programa
+ * real no fija un día de la semana por sesión, y enfoque/gruposMusculares
+ * son metadata derivada/inferida, no dato duro.
  */
 
 export interface IEjercicioDeRutina {
@@ -34,16 +26,16 @@ export interface IEjercicioDeRutina {
   repsMin: number;
   repsMax: number;
   descansoSegundos: number;
-  notas?: string; // ej. "10 minutos" en abdominales, instrucciones libres
+  notas?: string; // ej. "10 minutos" para ejercicios por tiempo en vez de por reps (abdominales, planchas, etc.)
 }
 
 export interface IDiaRutina {
   diaId: string;
   orden: number;
   nombreDia: string;
-  diaSemanaSugerido?: string; // opcional: el programa real no asigna día de la semana fijo
-  enfoque?: string; // opcional: ej. "fuerza" / "hipertrofia", no siempre se clasifica
-  gruposMusculares?: string[]; // opcional: se puede derivar de los ejercicios si no se provee
+  diaSemanaSugerido?: string;
+  enfoque?: string;
+  gruposMusculares?: string[];
   ejercicios: IEjercicioDeRutina[];
 }
 
@@ -81,13 +73,13 @@ const DiaRutinaSchema = new Schema<IDiaRutina>(
     nombreDia: { type: String, required: true },
     diaSemanaSugerido: { type: String, lowercase: true },
     enfoque: { type: String },
-    gruposMusculares: { type: [String], default: undefined },
+    gruposMusculares: { type: [String] },
     ejercicios: {
       type: [EjercicioDeRutinaSchema],
       required: true,
       validate: {
         validator: (ejercicios: IEjercicioDeRutina[]) => ejercicios.length > 0,
-        message: 'Un día de la rutina debe tener al menos un ejercicio'
+        message: 'Un día debe tener al menos un ejercicio'
       }
     }
   },
@@ -98,8 +90,6 @@ const RutinaSchema = new Schema<IRutina>(
   {
     rutinaId: { type: String, required: true, unique: true, trim: true, lowercase: true },
     nombre: { type: String, required: true },
-    // version y fechaCreacion tienen default: son metadatos de gestión del
-    // programa, no algo que el usuario deba escribir a mano en cada rutina.
     version: { type: String, default: '1.0.0' },
     objetivo: { type: String, required: true },
     diasPorSemana: { type: Number, required: true, min: 1, max: 7 },
@@ -113,8 +103,9 @@ const RutinaSchema = new Schema<IRutina>(
         message: 'Una rutina debe tener al menos un día'
       }
     },
-    // Permite tener varios programas guardados (ej. rutina de verano y otra
-    // de mantenimiento) y marcar cuál debe mostrar el Tracker por defecto.
+    // Permite tener varios programas guardados (ej. una rutina de verano y
+    // otra de mantenimiento) y marcar cuál es la que el Tracker debe mostrar
+    // por defecto, sin necesidad de borrar las anteriores.
     activa: { type: Boolean, default: true }
   },
   { timestamps: true }

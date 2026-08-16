@@ -4,9 +4,8 @@ import { Alimento } from '../models/Alimento.model';
 import { asyncHandler } from '../utils/asyncHandler';
 import { AppError } from '../utils/AppError';
 import { escalarMacrosPorGramos, sumarMacros, restarMacros, MACROS_EN_CERO, IMacrosBase } from '../utils/macros';
-import { obtenerMetaCaloricaVigente } from '../utils/macros';
+import { obtenerMetaCaloricaVigente } from '../services/macroCalculator.service';
 
-/** "2026-07-06" -> Date UTC a medianoche, para que el índice único {userId, fecha} sea estable sin importar la hora local del request. */
 function parsearFecha(fechaStr: string): Date {
   const fecha = new Date(`${fechaStr}T00:00:00.000Z`);
   if (Number.isNaN(fecha.getTime())) {
@@ -26,7 +25,6 @@ function calcularResumen(meta: IMacrosBase, totales: IMacrosBase) {
   return { totales, meta, restante, porcentajeCumplido };
 }
 
-/** A diferencia de restarMacros() de utils/macros.ts, este SÍ puede dar negativo (te pasaste de la meta) — es justo lo que el Dashboard necesita mostrar. */
 function restarConSigno(meta: IMacrosBase, totales: IMacrosBase): IMacrosBase {
   return {
     calorias: meta.calorias - totales.calorias,
@@ -37,12 +35,6 @@ function restarConSigno(meta: IMacrosBase, totales: IMacrosBase): IMacrosBase {
   };
 }
 
-/**
- * GET /api/macro-logs/:fecha — Dashboard del día.
- * Un GET no debe tener efectos secundarios: si el usuario todavía no
- * registró nada ese día, NO se crea ningún documento — se responde con
- * totales en cero contra la meta vigente del catálogo.
- */
 export const obtenerResumenDelDia = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.userId as string;
   const fecha = parsearFecha(req.params.fecha);
@@ -50,7 +42,7 @@ export const obtenerResumenDelDia = asyncHandler(async (req: Request, res: Respo
   const registroDelDia = await MacroLog.findOne({ userId, fecha });
 
   if (!registroDelDia) {
-    const metaVigente = await obtenerMetaCaloricaVigente(userId);
+    const metaVigente = await obtenerMetaCaloricaVigente();
     res.json({
       fecha: req.params.fecha,
       alimentosConsumidos: [],
@@ -66,14 +58,6 @@ export const obtenerResumenDelDia = asyncHandler(async (req: Request, res: Respo
   });
 });
 
-/**
- * POST /api/macro-logs/:fecha/alimentos
- * ---------------------------------------
- * Busca el alimento en el catálogo, calcula el snapshot de macros para la
- * cantidad indicada, crea el MacroLog del día si es la primera vez
- * (snapseando la meta vigente en ese momento) y recalcula totalesConsumidos.
- * body: { alimentoId, cantidadG, comidaId? }
- */
 export const agregarAlimentoConsumido = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.userId as string;
   const fecha = parsearFecha(req.params.fecha);
@@ -97,7 +81,7 @@ export const agregarAlimentoConsumido = asyncHandler(async (req: Request, res: R
   let registroDelDia = await MacroLog.findOne({ userId, fecha });
 
   if (!registroDelDia) {
-    const metaVigente = await obtenerMetaCaloricaVigente(userId);
+    const metaVigente = await obtenerMetaCaloricaVigente();
     registroDelDia = await MacroLog.create({
       userId,
       fecha,
@@ -127,11 +111,6 @@ export const agregarAlimentoConsumido = asyncHandler(async (req: Request, res: R
   });
 });
 
-/**
- * DELETE /api/macro-logs/:fecha/alimentos/:itemId
- * Quita un alimento puntual del día y resta su snapshot de macros del total
- * (no se recalcula sumando todo el array de nuevo).
- */
 export const eliminarAlimentoConsumido = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.userId as string;
   const fecha = parsearFecha(req.params.fecha);
@@ -142,16 +121,13 @@ export const eliminarAlimentoConsumido = asyncHandler(async (req: Request, res: 
     throw new AppError(404, 'No hay registro de macros para ese día');
   }
 
- // Buscamos el índice del elemento con JavaScript estándar para que TypeScript no llore
-  const itemIndex = registroDelDia.alimentosConsumidos.findIndex((a: any) => a._id && a._id.toString() === itemId);
-  
-  if (itemIndex === -1) {
+  const item = registroDelDia.alimentosConsumidos.id(itemId);
+  if (!item) {
     throw new AppError(404, `No existe un alimento registrado con id "${itemId}" en ese día`);
   }
 
-  const macrosARestar = registroDelDia.alimentosConsumidos[itemIndex].macros;
-  // Lo eliminamos del arreglo usando splice
-  registroDelDia.alimentosConsumidos.splice(itemIndex, 1);
+  const macrosARestar = item.macros;
+  item.deleteOne();
 
   registroDelDia.totalesConsumidos = restarMacros(registroDelDia.totalesConsumidos, macrosARestar);
 

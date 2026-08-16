@@ -46,8 +46,6 @@ export const iniciarSesion = asyncHandler(async (req: Request, res: Response) =>
     throw new AppError(400, 'email y password son requeridos');
   }
 
-  // passwordHash tiene `select: false` en el schema (ver User.model.ts), hay
-  // que pedirlo explícitamente para poder compararlo.
   const usuario = await User.findOne({ email: email.toLowerCase().trim() }).select('+passwordHash');
   if (!usuario) {
     throw new AppError(401, 'Credenciales inválidas');

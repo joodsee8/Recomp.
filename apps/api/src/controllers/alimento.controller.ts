@@ -3,11 +3,6 @@ import { Alimento } from '../models/Alimento.model';
 import { asyncHandler } from '../utils/asyncHandler';
 import { AppError } from '../utils/AppError';
 
-/**
- * GET /api/alimentos?q=pollo&categoria=proteina
- * `q` usa el índice de texto sobre `nombre` (ver Alimento.model.ts) para el
- * buscador/autocompletar del Tracker de macros.
- */
 export const listarAlimentos = asyncHandler(async (req: Request, res: Response) => {
   const { q, categoria } = req.query as { q?: string; categoria?: string };
 
@@ -20,7 +15,6 @@ export const listarAlimentos = asyncHandler(async (req: Request, res: Response) 
   res.json({ alimentos });
 });
 
-/** GET /api/alimentos/:alimentoId */
 export const obtenerAlimento = asyncHandler(async (req: Request, res: Response) => {
   const alimento = await Alimento.findOne({ alimentoId: req.params.alimentoId });
 

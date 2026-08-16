@@ -1,12 +1,3 @@
-/**
- * macros.ts
- * ---------
- * Helpers puros de aritmética de macros, compartidos por cualquier
- * controller que necesite escalar macrosPor100g a una cantidad consumida, o
- * sumar dos objetos de macros. Centralizado acá para no repetir esta lógica
- * en comida.controller.ts y macroLog.controller.ts por separado.
- */
-
 export interface IMacrosBase {
   calorias: number;
   proteinaG: number;
@@ -27,7 +18,6 @@ function redondear1Decimal(n: number): number {
   return Math.round(n * 10) / 10;
 }
 
-/** Escala macrosPor100g a la cantidad real consumida (factor = cantidadG / 100). */
 export function escalarMacrosPorGramos(macrosPor100g: IMacrosBase, cantidadG: number): IMacrosBase {
   const factor = cantidadG / 100;
   return {
@@ -49,7 +39,6 @@ export function sumarMacros(a: IMacrosBase, b: IMacrosBase): IMacrosBase {
   };
 }
 
-/** Resta b de a, sin bajar de cero (por si hay drift de redondeo al eliminar un item). */
 export function restarMacros(a: IMacrosBase, b: IMacrosBase): IMacrosBase {
   return {
     calorias: Math.max(0, a.calorias - b.calorias),
@@ -59,7 +48,3 @@ export function restarMacros(a: IMacrosBase, b: IMacrosBase): IMacrosBase {
     fibraG: Math.max(0, redondear1Decimal(a.fibraG - b.fibraG))
   };
 }
-
-export const obtenerMetaCaloricaVigente = async (userId: string | any) => {
-  return { calorias: 2300, proteinaG: 160, carbohidratosG: 220, grasasG: 65, fibraG: 30 };
-};

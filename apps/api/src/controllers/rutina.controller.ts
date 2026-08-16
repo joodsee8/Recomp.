@@ -4,19 +4,15 @@ import { Ejercicio } from '../models/Ejercicio.model';
 import { asyncHandler } from '../utils/asyncHandler';
 import { AppError } from '../utils/AppError';
 
-/** GET /api/rutinas?activa=false para incluir también las inactivas */
 export const listarRutinas = asyncHandler(async (req: Request, res: Response) => {
   const incluirInactivas = req.query.activa === 'false';
   const filtro = incluirInactivas ? {} : { activa: true };
 
-  // Lista liviana: sin el detalle de "dias" (puede pesar bastante con 5 días
-  // y ~30 ejercicios). El detalle completo se pide con GET /rutinas/:rutinaId.
   const rutinas = await Rutina.find(filtro).select('-dias');
 
   res.json({ rutinas });
 });
 
-/** GET /api/rutinas/:rutinaId — programa completo con todos los días */
 export const obtenerRutina = asyncHandler(async (req: Request, res: Response) => {
   const rutina = await Rutina.findOne({ rutinaId: req.params.rutinaId });
 
@@ -29,12 +25,8 @@ export const obtenerRutina = asyncHandler(async (req: Request, res: Response) =>
 
 /**
  * GET /api/rutinas/:rutinaId/dias/:diaId
- * ---------------------------------------
  * Devuelve UN día del programa con cada ejercicio ya resuelto contra el
- * catálogo Ejercicio (nombre, grupoMuscularPrincipal, equipo, videoUrl). Es
- * el endpoint que alimenta la pantalla del Tracker: con una sola llamada el
- * frontend tiene todo lo necesario para pintar "Lunes - Torso Pesado" sin
- * tener que hacer una segunda consulta a /ejercicios por su cuenta.
+ * catálogo Ejercicio (nombre, grupoMuscularPrincipal, equipo, videoUrl).
  */
 export const obtenerDiaDeRutina = asyncHandler(async (req: Request, res: Response) => {
   const { rutinaId, diaId } = req.params;
@@ -63,9 +55,6 @@ export const obtenerDiaDeRutina = asyncHandler(async (req: Request, res: Respons
       repsMax: ej.repsMax,
       descansoSegundos: ej.descansoSegundos,
       notas: ej.notas,
-      // Resuelto contra el catálogo — si algún ejercicioId quedó huérfano
-      // (no debería pasar si el seed corrió bien) se degrada con nulls en
-      // vez de tronar el endpoint completo.
       nombre: infoCatalogo?.nombre ?? ej.ejercicioId,
       grupoMuscularPrincipal: infoCatalogo?.grupoMuscularPrincipal ?? null,
       equipo: infoCatalogo?.equipo ?? null,

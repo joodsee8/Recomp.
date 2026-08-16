@@ -7,12 +7,6 @@ import { Schema, model, Document } from 'mongoose';
  * de dieta.json), ej. "Almuerzo - Pollo, Arroz y Brócoli". Cada comida es
  * una composición de alimentos del catálogo Alimento con su cantidad en
  * gramos.
- *
- * No se agrega aquí este modelo por pedido explícito, pero es necesario
- * para que seedDieta.ts pueda sembrar TODO dieta.json de forma coherente
- * (si solo sembramos "alimentos" e ignoramos "comidas", perdemos la mitad
- * del archivo y el frontend no podría ofrecer "seleccionar comida
- * estructurada" en vez de cargar alimento por alimento).
  */
 
 export interface IIngredienteDeComida {
@@ -43,7 +37,7 @@ const ComidaSchema = new Schema<IComida>(
   {
     comidaId: { type: String, required: true, unique: true, trim: true, lowercase: true },
     nombre: { type: String, required: true, trim: true },
-    tipo: { type: String, index: true, trim: true }, // ej. "Desayuno" | "Comida" | "Cena" | "Snack" — libre a propósito, no enum, por si el usuario agrega categorías nuevas
+    tipo: { type: String, index: true, trim: true }, // ej. "Desayuno" | "Comida" | "Cena" | "Snack" — libre a propósito, no enum
     horarioSugerido: { type: String },
     ingredientes: {
       type: [IngredienteDeComidaSchema],

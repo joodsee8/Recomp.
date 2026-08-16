@@ -5,7 +5,6 @@ import { asyncHandler } from '../utils/asyncHandler';
 import { AppError } from '../utils/AppError';
 import { escalarMacrosPorGramos, sumarMacros, MACROS_EN_CERO } from '../utils/macros';
 
-/** GET /api/comidas?tipo=Desayuno */
 export const listarComidas = asyncHandler(async (req: Request, res: Response) => {
   const { tipo } = req.query as { tipo?: string };
   const filtro = tipo ? { tipo } : {};
@@ -15,14 +14,6 @@ export const listarComidas = asyncHandler(async (req: Request, res: Response) =>
   res.json({ comidas });
 });
 
-/**
- * GET /api/comidas/:comidaId
- * ---------------------------
- * Resuelve cada ingrediente contra el catálogo Alimento y devuelve los
- * macros ya calculados por ingrediente y el total de la comida — así el
- * usuario ve "El Clásico Mexicano: 683 kcal / 91g proteína" ANTES de
- * decidir registrarla en su MacroLog del día.
- */
 export const obtenerComida = asyncHandler(async (req: Request, res: Response) => {
   const comida = await Comida.findOne({ comidaId: req.params.comidaId });
   if (!comida) {
@@ -39,8 +30,6 @@ export const obtenerComida = asyncHandler(async (req: Request, res: Response) =>
     const alimento = alimentoPorId.get(ing.alimentoId);
 
     if (!alimento) {
-      // No debería pasar si el seed corrió bien, pero no tronamos el
-      // endpoint completo por un ingrediente huérfano — se degrada a null.
       return { alimentoId: ing.alimentoId, nombre: ing.alimentoId, cantidadG: ing.cantidadG, macros: null };
     }
 

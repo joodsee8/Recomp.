@@ -4,15 +4,9 @@ import { Schema, model, Document, Types } from 'mongoose';
  * WorkoutLog
  * ----------
  * Registra UNA sesión de entrenamiento real del usuario (no la prescripción,
- * eso vive en rutinas.json / colección Rutina). Aquí se guarda lo que
- * efectivamente levantó: peso y repeticiones por serie, para poder comparar
- * semana contra semana y validar sobrecarga progresiva.
- *
- * Decisión de diseño: los ejercicios y series se modelan como subdocumentos
- * EMBEBIDOS (no colecciones separadas con ref). Razón: siempre se leen y
- * escriben junto con la sesión completa (nunca se consulta "una serie suelta"
- * de forma aislada), por lo que embeber evita JOINs/populates innecesarios y
- * hace que guardar una sesión completa sea una sola escritura atómica.
+ * eso vive en Rutina). Aquí se guarda lo que efectivamente levantó: peso y
+ * repeticiones por serie, para poder comparar semana contra semana y
+ * validar sobrecarga progresiva.
  */
 
 export interface ISerieRegistrada {
@@ -25,8 +19,8 @@ export interface ISerieRegistrada {
 }
 
 export interface IEjercicioRegistrado {
-  ejercicioId: string; // referencia "lógica" al ejercicioId del catálogo (rutinas.json)
-  nombreEjercicio: string; // denormalizado a propósito: el historial debe verse igual aunque el catálogo cambie de nombre después
+  ejercicioId: string;
+  nombreEjercicio: string;
   series: ISerieRegistrada[];
   notas?: string;
 }
@@ -34,7 +28,7 @@ export interface IEjercicioRegistrado {
 export interface IWorkoutLog extends Document {
   userId: Types.ObjectId;
   fecha: Date;
-  diaRutinaId: string; // ej. "torso_pesado", referencia lógica a rutinas.json
+  diaRutinaId: string;
   nombreDia: string;
   ejerciciosRegistrados: IEjercicioRegistrado[];
   duracionMinutos?: number;
@@ -53,7 +47,7 @@ const SerieRegistradaSchema = new Schema<ISerieRegistrada>(
     completada: { type: Boolean, default: true },
     esRecordPersonal: { type: Boolean, default: false }
   },
-  { _id: false } // no necesita id propio: nunca se referencia ni se edita una serie de forma individual fuera del array
+  { _id: false }
 );
 
 const EjercicioRegistradoSchema = new Schema<IEjercicioRegistrado>(
@@ -87,11 +81,7 @@ const WorkoutLogSchema = new Schema<IWorkoutLog>(
   { timestamps: true }
 );
 
-// Índice principal: el Historial siempre pagina "las últimas sesiones de este usuario"
 WorkoutLogSchema.index({ userId: 1, fecha: -1 });
-
-// Índice secundario: acelera la vista "progreso de Torso Pesado a través del tiempo",
-// que es exactamente lo que se necesita para graficar sobrecarga progresiva por ejercicio/día.
 WorkoutLogSchema.index({ userId: 1, diaRutinaId: 1, fecha: -1 });
 
 export const WorkoutLog = model<IWorkoutLog>('WorkoutLog', WorkoutLogSchema);

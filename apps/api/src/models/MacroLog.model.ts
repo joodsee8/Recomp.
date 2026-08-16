@@ -4,17 +4,12 @@ import { Schema, model, Document, Types } from 'mongoose';
  * MacroLog
  * --------
  * Registra lo que el usuario comió en UN día específico. Existe un único
- * documento por (userId, fecha): cada vez que el usuario agrega un alimento
- * se hace push al array `alimentosConsumidos` y se recalculan los totales.
+ * documento por (userId, fecha).
  *
- * Decisión clave de diseño: `macros` dentro de cada alimento consumido es un
- * SNAPSHOT calculado en el momento del registro (no un simple `cantidadG`
- * que obligue a recalcular contra el catálogo cada vez). Esto es importante
- * porque dieta.json puede cambiar en el futuro (el usuario corrige las
- * calorías de un alimento, sube una nueva versión del catálogo, etc.) y el
- * historial de días pasados NO debe moverse retroactivamente. Es el mismo
- * principio que usan apps como MyFitnessPal: el diario es inmutable respecto
- * al catálogo.
+ * `macros` dentro de cada alimento consumido es un SNAPSHOT calculado en el
+ * momento del registro (no un simple `cantidadG` que obligue a recalcular
+ * contra el catálogo cada vez), para que corregir un dato del catálogo no
+ * altere el historial de días pasados.
  */
 
 export interface IMacros {
@@ -26,20 +21,20 @@ export interface IMacros {
 }
 
 export interface IAlimentoConsumido {
-  alimentoId: string; // referencia lógica al catálogo en dieta.json
-  nombreAlimento: string; // denormalizado, mismo motivo que en WorkoutLog
+  alimentoId: string;
+  nombreAlimento: string;
   cantidadG: number;
-  comidaId?: string; // a qué comida estructurada pertenece (ej. "almuerzo_pollo_arroz"), opcional si fue un registro libre
+  comidaId?: string;
   horaRegistro: Date;
-  macros: IMacros; // snapshot ya calculado, ver razonamiento arriba
+  macros: IMacros;
 }
 
 export interface IMacroLog extends Document {
   userId: Types.ObjectId;
-  fecha: Date; // normalizada a 00:00:00 del día (ver helper normalizarFecha en el service layer)
-  metaDelDia: IMacros; // snapshot de la meta vigente ese día (la meta también puede cambiar con el tiempo)
+  fecha: Date;
+  metaDelDia: IMacros;
   alimentosConsumidos: IAlimentoConsumido[];
-  totalesConsumidos: IMacros; // denormalizado y recalculado en cada escritura para que el Dashboard lea en O(1), sin tener que sumar el array en cada request
+  totalesConsumidos: IMacros;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -64,7 +59,7 @@ const AlimentoConsumidoSchema = new Schema<IAlimentoConsumido>(
     horaRegistro: { type: Date, required: true, default: Date.now },
     macros: { type: MacrosSchema, required: true }
   },
-  { _id: true } // a diferencia de las series del WorkoutLog, aquí SÍ se necesita _id propio: el usuario debe poder borrar un alimento puntual del día sin tocar el resto
+  { _id: true } // el usuario debe poder borrar un alimento puntual del día sin tocar el resto
 );
 
 const MacroLogSchema = new Schema<IMacroLog>(
@@ -82,8 +77,6 @@ const MacroLogSchema = new Schema<IMacroLog>(
   { timestamps: true }
 );
 
-// Un único documento por usuario por día: evita duplicados y habilita upsert atómico
-// con findOneAndUpdate({ userId, fecha }, { $push: ... }, { upsert: true }).
 MacroLogSchema.index({ userId: 1, fecha: 1 }, { unique: true });
 
 export const MacroLog = model<IMacroLog>('MacroLog', MacroLogSchema);

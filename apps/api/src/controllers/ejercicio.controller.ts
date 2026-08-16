@@ -3,7 +3,6 @@ import { Ejercicio } from '../models/Ejercicio.model';
 import { asyncHandler } from '../utils/asyncHandler';
 import { AppError } from '../utils/AppError';
 
-/** GET /api/ejercicios?grupoMuscular=hombros */
 export const listarEjercicios = asyncHandler(async (req: Request, res: Response) => {
   const { grupoMuscular } = req.query as { grupoMuscular?: string };
 
@@ -13,7 +12,6 @@ export const listarEjercicios = asyncHandler(async (req: Request, res: Response)
   res.json({ ejercicios });
 });
 
-/** GET /api/ejercicios/:ejercicioId */
 export const obtenerEjercicio = asyncHandler(async (req: Request, res: Response) => {
   const ejercicio = await Ejercicio.findOne({ ejercicioId: req.params.ejercicioId });
 

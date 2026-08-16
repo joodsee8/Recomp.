@@ -6,13 +6,7 @@ import { Schema, model, Document } from 'mongoose';
  * Catálogo de alimentos (array "alimentos" de dieta.json). Los macros se
  * guardan SIEMPRE normalizados por cada 100g: es la unidad universal que
  * permite escalar a cualquier cantidad consumida sin tener que guardar
- * combinaciones precalculadas (ver macroCalculator.service.ts, que hace
- * `factorEscala = cantidadG / 100`).
- *
- * Importante: este modelo es el CATÁLOGO. El registro de lo que el usuario
- * realmente comió vive en MacroLog, que guarda un snapshot de estos macros
- * al momento de registrar el alimento (para que corregir un dato acá no
- * altere el historial de días pasados).
+ * combinaciones precalculadas.
  */
 
 export interface IMacrosPor100g {
@@ -65,8 +59,7 @@ const AlimentoSchema = new Schema<IAlimento>(
   { timestamps: true }
 );
 
-// Búsqueda por nombre para el buscador de alimentos del Tracker de macros
-// (ej. autocompletar "poll..." -> "Pechuga de Pollo").
+// Búsqueda por nombre para el buscador de alimentos del Tracker de macros.
 AlimentoSchema.index({ nombre: 'text' });
 
 export const Alimento = model<IAlimento>('Alimento', AlimentoSchema);
