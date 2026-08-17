@@ -1,10 +1,18 @@
 {
   "metaCalorica": {
-    "calorias": 2400,
-    "proteinaG": 190,
-    "carbohidratosG": 220,
+    "calorias": 2550,
+    "proteinaG": 195,
+    "carbohidratosG": 285,
     "grasasG": 70,
-    "fibraG": 35
+    "fibraG": 35,
+    "_calculadoPara": {
+      "pesoKg": 88,
+      "alturaCm": 175,
+      "edad": 20,
+      "grasaCorporalEstimadaPct": 24.1,
+      "metodo": "BMR Mifflin-St Jeor x factor actividad 1.55, deficit 12%, proteina 2.2g/kg, grasa 25% kcal, US Navy BF% (cuello 39.5cm, cintura 96.5cm; cadera no aplica en formula masculina)",
+      "fecha": "2026-08-17"
+    }
   },
   "alimentos": [
     {
