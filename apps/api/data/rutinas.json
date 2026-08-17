@@ -5,6 +5,10 @@
     "objetivo": "Hipertrofia",
     "diasPorSemana": 5,
     "notasGenerales": "El Día 5 está marcado como opcional en el nombre del día; se puede omitir según disponibilidad de tiempo.",
+    "calentamiento": {
+      "duracionMinutos": "5-10",
+      "descripcion": "Cardio ligero + movilidad articular, seguido de una serie ligera de calentamiento antes del primer ejercicio principal de cada día."
+    },
     "dias": [
       {
         "diaId": "dia_1_hombros_triceps",
