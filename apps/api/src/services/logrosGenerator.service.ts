@@ -6,7 +6,7 @@ import { METRICAS_LOGROS, esMetricaValida, MetricaLogro } from '../data/metricas
 import { generarJSON } from './gemini.service';
 import { calcularLimitesPeriodo } from './logrosEvaluator.service';
 import { AppError } from '../utils/AppError';
-import { types } from 'mongoose';
+import { Types } from 'mongoose';
 
 /**
  * logrosGenerator.service.ts
