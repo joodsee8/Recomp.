@@ -42,7 +42,7 @@ function leerVariablesDeEntorno(): EnvConfig {
     nodeEnv: (process.env.NODE_ENV as EnvConfig['nodeEnv']) ?? 'development',
     clientOrigin: process.env.CLIENT_ORIGIN ?? 'https://fitnessrecomp.netlify.app',
     geminiApiKey: process.env.GEMINI_API_KEY?.trim() || null,
-    geminiModelo: process.env.GEMINI_MODELO ?? 'gemini-2.0-flash'
+    geminiModelo: process.env.GEMINI_MODELO ?? 'gemini-3.6-flash'
   };
 }
 
