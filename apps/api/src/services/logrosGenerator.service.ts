@@ -2,10 +2,11 @@ import { WorkoutLog } from '../models/WorkoutLog.model';
 import { MacroLog } from '../models/MacroLog.model';
 import { Logro, ILogro } from '../models/Logro.model';
 import { ICONOS_LOGROS, esIconoValido } from '../data/iconosLogros';
-import { METRICAS_LOGROS, esMetricaValida } from '../data/metricasLogros';
+import { METRICAS_LOGROS, esMetricaValida, MetricaLogro } from '../data/metricasLogros';
 import { generarJSON } from './gemini.service';
 import { calcularLimitesPeriodo } from './logrosEvaluator.service';
 import { AppError } from '../utils/AppError';
+import { types } from 'mongoose';
 
 /**
  * logrosGenerator.service.ts
@@ -130,7 +131,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
   categoria: 'dieta' | 'ejercicio' | 'mixto';
   periodo: 'diario' | 'semanal' | 'mensual';
   icono: string;
-  metrica: string;
+  metrica: MetricaLogro;
   comparador: '>=' | '=';
   objetivo: number;
 } | null {
@@ -165,6 +166,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
  * activos (defensa extra además de pedírselo a Gemini en el prompt).
  */
 export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
+  const userObjectId = new types.ObjectId(userId);
   const [resumenHistorial, logrosActivos] = await Promise.all([
     construirResumenHistorial(userId),
     Logro.find({ userId, desbloqueado: false, fechaFinPeriodo: { $gte: new Date() } }).select('titulo')
@@ -192,7 +194,7 @@ export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
     const { inicio, fin } = calcularLimitesPeriodo(validado.periodo);
 
     logrosAInsertar.push({
-      userId,
+      userId: userObjectId,
       titulo: validado.titulo,
       descripcion: validado.descripcion,
       categoria: validado.categoria,
