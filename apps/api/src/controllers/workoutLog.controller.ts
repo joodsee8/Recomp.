@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { WorkoutLog, IEjercicioRegistrado } from '../models/WorkoutLog.model';
 import { asyncHandler } from '../utils/asyncHandler';
 import { AppError } from '../utils/AppError';
+import { eliminarSesion as eliminarSesionService } from '../services/workoutLog.service';
 
 async function marcarRecordsPersonales(
   userId: string,
@@ -148,4 +149,10 @@ export const obtenerProgresoEjercicio = asyncHandler(async (req: Request, res: R
   });
 
   res.json({ ejercicioId, progreso });
+});
+
+export const eliminarSesion = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.userId as string;
+  const sesion = await eliminarSesionService(userId, req.params.id);
+  res.json({ eliminada: true, sesion });
 });

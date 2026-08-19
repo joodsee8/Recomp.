@@ -47,6 +47,10 @@ export interface IRutina extends Document {
   diasPorSemana: number;
   fechaCreacion: Date;
   notasGenerales?: string;
+  calentamiento?: {
+    duracionMinutos: string;
+    descripcion: string;
+  };
   dias: IDiaRutina[];
   activa: boolean;
   createdAt: Date;
@@ -95,6 +99,16 @@ const RutinaSchema = new Schema<IRutina>(
     diasPorSemana: { type: Number, required: true, min: 1, max: 7 },
     fechaCreacion: { type: Date, default: Date.now },
     notasGenerales: { type: String },
+    calentamiento: {
+      type: new Schema(
+        {
+          duracionMinutos: { type: String, required: true },
+          descripcion: { type: String, required: true }
+        },
+        { _id: false }
+      ),
+      required: false
+    },
     dias: {
       type: [DiaRutinaSchema],
       required: true,

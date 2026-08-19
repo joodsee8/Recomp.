@@ -22,9 +22,9 @@ function PuntoPersonalizado(props: { cx?: number; cy?: number; payload?: PuntoDe
   if (cx == null || cy == null) return null;
 
   if (payload?.huboRecordPersonal) {
-    return <Dot cx={cx} cy={cy} r={5} fill="var(--color-proteina)" stroke="none" />;
+    return <Dot cx={cx} cy={cy} r={5} fill="#c23b3b" stroke="none" />;
   }
-  return <Dot cx={cx} cy={cy} r={3} fill="var(--color-text-muted)" stroke="none" />;
+  return <Dot cx={cx} cy={cy} r={3} fill="#8b9098" stroke="none" />;
 }
 
 export function ProgresoChart({ puntos }: Props) {
@@ -42,34 +42,34 @@ export function ProgresoChart({ puntos }: Props) {
     <div className="progreso-chart">
       <ResponsiveContainer width="100%" height={260}>
         <LineChart data={datos} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-          <CartesianGrid stroke="var(--color-border)" vertical={false} />
+          <CartesianGrid stroke="#2c3036" vertical={false} />
           <XAxis
             dataKey="fecha"
-            tick={{ fill: 'var(--color-text-muted)', fontSize: 12, fontFamily: 'var(--font-mono)' }}
-            axisLine={{ stroke: 'var(--color-border)' }}
+            tick={{ fill: '#8b9098', fontSize: 12, fontFamily: 'var(--font-mono)' }}
+            axisLine={{ stroke: '#2c3036' }}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: 'var(--color-text-muted)', fontSize: 12, fontFamily: 'var(--font-mono)' }}
+            tick={{ fill: '#8b9098', fontSize: 12, fontFamily: 'var(--font-mono)' }}
             axisLine={false}
             tickLine={false}
             width={40}
           />
           <Tooltip
             contentStyle={{
-              background: 'var(--color-surface-raised)',
-              border: '1px solid var(--color-border-strong)',
+              background: '#24282d',
+              border: '1px solid #3a3f46',
               borderRadius: 6,
               fontFamily: 'var(--font-mono)',
               fontSize: 12
             }}
-            labelStyle={{ color: 'var(--color-text-muted)' }}
+            labelStyle={{ color: '#8b9098' }}
             formatter={(valor: number) => [`${valor} kg`, 'Peso máximo']}
           />
           <Line
             type="monotone"
             dataKey="pesoMaximoKg"
-            stroke="var(--color-carbos)"
+            stroke="#d9a62e"
             strokeWidth={2}
             dot={<PuntoPersonalizado />}
             activeDot={{ r: 6 }}

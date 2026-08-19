@@ -88,6 +88,7 @@ export interface DiaDeRutinaResuelto {
   enfoque: string | null;
   gruposMusculares: string[];
   ejercicios: EjercicioDeDiaResuelto[];
+  calentamiento: { duracionMinutos: string; descripcion: string } | null;
 }
 
 // ---------- WorkoutLog ----------

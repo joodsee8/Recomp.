@@ -68,6 +68,7 @@ export const obtenerDiaDeRutina = asyncHandler(async (req: Request, res: Respons
     nombreDia: dia.nombreDia,
     enfoque: dia.enfoque ?? null,
     gruposMusculares: dia.gruposMusculares ?? [],
-    ejercicios: ejerciciosResueltos
+    ejercicios: ejerciciosResueltos,
+    calentamiento: rutina.calentamiento ?? null
   });
 });

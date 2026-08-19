@@ -4,7 +4,8 @@ import {
   crearSesion,
   listarHistorial,
   obtenerSesion,
-  obtenerProgresoEjercicio
+  obtenerProgresoEjercicio,
+  eliminarSesion
 } from '../controllers/workoutLog.controller';
 
 const router = Router();
@@ -15,5 +16,6 @@ router.post('/', crearSesion);
 router.get('/', listarHistorial);
 router.get('/progreso/:ejercicioId', obtenerProgresoEjercicio);
 router.get('/:id', obtenerSesion);
+router.delete('/:id', eliminarSesion);
 
 export default router;

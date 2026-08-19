@@ -135,3 +135,58 @@ export async function eliminarAlimentoConsumidoPorId(userId: string, fecha: Date
     ...calcularResumen(registroDelDia.metaDelDia, registroDelDia.totalesConsumidos)
   };
 }
+
+/**
+ * Borra un alimento consumido por DESCRIPCIÓN en lenguaje natural (no por
+ * itemId exacto) — lo usa el Chat, que solo tiene "el pollo que comí" o
+ * similar, no un id de Mongo. Si hay varias coincidencias (ej. registraste
+ * pollo dos veces hoy), borra la más reciente por default: es la corrección
+ * más probable ("me equivoqué en lo último que puse").
+ */
+/**
+ * Palabras "significativas" de una descripción en lenguaje natural: quita
+ * artículos y conectores cortos (la/el/de/un...) para no exigir que el
+ * usuario diga el nombre exacto del catálogo. "la avena" -> ["avena"].
+ */
+function palabrasSignificativas(texto: string): string[] {
+  return texto
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((palabra) => palabra.length > 2);
+}
+
+export async function eliminarAlimentoPorDescripcion(userId: string, fecha: Date, descripcion: string) {
+  const registroDelDia = await MacroLog.findOne({ userId, fecha });
+  if (!registroDelDia || registroDelDia.alimentosConsumidos.length === 0) {
+    throw new AppError(404, 'No hay nada registrado ese día para eliminar');
+  }
+
+  const palabras = palabrasSignificativas(descripcion);
+  const coincidencias = registroDelDia.alimentosConsumidos.filter((item) => {
+    const nombreLower = item.nombreAlimento.toLowerCase();
+    return palabras.some((palabra) => nombreLower.includes(palabra));
+  });
+
+  if (coincidencias.length === 0) {
+    throw new AppError(404, `No encontré "${descripcion}" en lo que registraste ese día`);
+  }
+
+  const itemAEliminar =
+    coincidencias.length === 1
+      ? coincidencias[0]
+      : [...coincidencias].sort((a, b) => new Date(b.horaRegistro).getTime() - new Date(a.horaRegistro).getTime())[0];
+
+  const nombreEliminado = itemAEliminar.nombreAlimento;
+  const cantidadEliminada = itemAEliminar.cantidadG;
+  const macrosARestar = itemAEliminar.macros;
+
+  itemAEliminar.deleteOne();
+  registroDelDia.totalesConsumidos = restarMacros(registroDelDia.totalesConsumidos, macrosARestar);
+  await registroDelDia.save();
+
+  return {
+    alimentoEliminado: { nombre: nombreEliminado, cantidadG: cantidadEliminada },
+    huboVariasCoincidencias: coincidencias.length > 1,
+    ...calcularResumen(registroDelDia.metaDelDia, registroDelDia.totalesConsumidos)
+  };
+}

@@ -124,6 +124,7 @@ export function SesionTracker({ dia, onSesionGuardada, onCambiarDia }: Props) {
       <FaseCalentamiento
         onContinuar={() => setFase({ tipo: 'inicio_ejercicio', indiceEjercicio: 0 })}
         onCambiarDia={onCambiarDia}
+        calentamiento={dia.calentamiento}
       />
     );
   }
