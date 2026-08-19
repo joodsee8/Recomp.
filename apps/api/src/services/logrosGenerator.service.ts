@@ -166,7 +166,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
  * activos (defensa extra además de pedírselo a Gemini en el prompt).
  */
 export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
-  const userObjectId = new types.ObjectId(userId);
+  const userObjectId = new Types.ObjectId(userId);
   const [resumenHistorial, logrosActivos] = await Promise.all([
     construirResumenHistorial(userId),
     Logro.find({ userId, desbloqueado: false, fechaFinPeriodo: { $gte: new Date() } }).select('titulo')
