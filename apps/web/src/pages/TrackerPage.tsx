@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { AppShell } from '../components/layout/AppShell';
 import { SelectorDia } from '../components/workout/SelectorDia';
 import { SesionTracker } from '../components/workout/SesionTracker';
 import type { DiaDeRutinaResuelto } from '../types/api';
@@ -7,17 +6,15 @@ import type { DiaDeRutinaResuelto } from '../types/api';
 export function TrackerPage() {
   const [dia, setDia] = useState<DiaDeRutinaResuelto | null>(null);
 
-  return (
-    <AppShell>
-      {!dia ? (
-        <div>
-          <h1>Tracker</h1>
-          <h2 style={{ marginBottom: '1.5rem' }}>Elegí el día de hoy</h2>
-          <SelectorDia onDiaListo={setDia} />
-        </div>
-      ) : (
-        <SesionTracker dia={dia} onSesionGuardada={() => {}} onCambiarDia={() => setDia(null)} />
-      )}
-    </AppShell>
-  );
+  if (!dia) {
+    return (
+      <div className="tracker-pagina">
+        <h1>Tracker</h1>
+        <h2 style={{ marginTop: 'var(--space-2)', marginBottom: 'var(--space-5)' }}>Elige el día de hoy</h2>
+        <SelectorDia onDiaListo={setDia} />
+      </div>
+    );
+  }
+
+  return <SesionTracker dia={dia} onSesionGuardada={() => {}} onCambiarDia={() => setDia(null)} />;
 }

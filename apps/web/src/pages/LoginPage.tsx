@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { AdamAvatar } from '../components/adam/AdamAvatar';
 import './AuthPage.css';
 
 export function LoginPage() {
@@ -27,10 +28,19 @@ export function LoginPage() {
 
   return (
     <div className="auth-pagina">
-      <form className="tarjeta auth-tarjeta" onSubmit={manejarSubmit}>
+      <div className="auth-cabecera">
         <div className="auth-marca">
           RECOMP<span className="auth-marca-punto">.</span>
         </div>
+        <div className="auth-adam">
+          <span className="auth-adam-retrato">
+            <AdamAvatar tamano={64} />
+          </span>
+          <p className="auth-adam-dialogo">Soy A.D.A.M., tu coach. Entra para seguir con tu entreno.</p>
+        </div>
+      </div>
+
+      <form className="tarjeta auth-tarjeta" onSubmit={manejarSubmit}>
         <h1>Iniciar sesión</h1>
 
         <div className="campo">

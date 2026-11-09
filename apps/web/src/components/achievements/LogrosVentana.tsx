@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Logro, PeriodoLogro } from '../../types/api';
 import * as logrosService from '../../services/logros.service';
 import { ApiError } from '../../services/apiClient';
+import { PixelIcon } from '../ui/PixelIcon';
 import { LogroCard } from './LogroCard';
 import './LogrosVentana.css';
 
@@ -73,7 +74,7 @@ export function LogrosVentana({ onCerrar }: Props) {
         <header className="logros-ventana-header">
           <h1>Logros</h1>
           <button className="logros-ventana-cerrar" onClick={onCerrar} aria-label="Cerrar">
-            ✕
+            <PixelIcon nombre="cerrar" tamano={18} />
           </button>
         </header>
 

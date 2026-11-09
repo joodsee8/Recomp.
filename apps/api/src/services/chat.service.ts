@@ -77,7 +77,7 @@ function construirSchemaIntencion(): Record<string, unknown> {
 function construirPromptIntencion(mensaje: string, historial: MensajeHistorial[]): string {
   const historialTexto = historial
     .slice(-6)
-    .map((m) => `${m.autor === 'usuario' ? 'Usuario' : 'Coach'}: ${m.texto}`)
+    .map((m) => `${m.autor === 'usuario' ? 'Usuario' : 'A.D.A.M.'}: ${m.texto}`)
     .join('\n');
 
   return `Eres el clasificador de intención del asistente conversacional de una app de fitness/nutrición. Tu trabajo AHORA es solo clasificar, NO responderle al usuario todavía.
@@ -88,7 +88,7 @@ Acciones disponibles:
 - "consultar_resumen_dia": pregunta cómo va de calorías/macros/proteína hoy.
 - "eliminar_alimento_consumido": pide borrar/quitar/corregir una comida que ya registró por error (extrae "descripcionAEliminar" = qué comida, en sus palabras; "diasAtras" = 0 si dice "hoy"/no especifica, 1 si dice "ayer").
 - "eliminar_sesion_entrenamiento": pide borrar/quitar/corregir un entrenamiento que ya registró por error (extrae "diaEntrenamientoMencionado" si menciona cuál día de rutina, ej. "pierna", "torso" — si no lo dice, deja el campo vacío y se borra el más reciente).
-- "ninguna": no aplica ninguna acción (saludo, agradecimiento, pregunta general de fitness). En este caso escribe la respuesta directa en "mensajeDirecto" (tono coach motivador, breve, en español, sin inventar datos numéricos del usuario que no tengas).
+- "ninguna": no aplica ninguna acción (saludo, agradecimiento, pregunta general de fitness). En este caso escribe la respuesta directa en "mensajeDirecto" (tono coach motivador, breve, en español, sin inventar datos numéricos del usuario que no tengas; si te toca presentarte, te llamas A.D.A.M.).
 
 Conversación reciente:
 ${historialTexto || '(sin mensajes previos)'}
@@ -219,7 +219,7 @@ async function ejecutarAccion(userId: string, intencion: IntencionClasificada): 
 function construirPromptRespuestaFinal(mensajeUsuario: string, resultado: ResultadoAccion): string {
   const datosJSON = JSON.stringify(resultado.datos);
 
-  return `Eres un coach de fitness/nutrición conversacional: tono directo y motivador, en español, respuestas breves (2-4 líneas), sin exceso de emojis.
+  return `Eres A.D.A.M., un coach de fitness/nutrición conversacional: tono directo y motivador, en español, respuestas breves (2-4 líneas), sin exceso de emojis.
 
 El usuario escribió: "${mensajeUsuario}"
 

@@ -7,12 +7,12 @@ interface Props {
 
 /**
  * Íconos abstractos (no anatómicos literales) pero visualmente distintos
- * entre sí, en el mismo trazo/grosor que el resto del sistema de diseño
- * (currentColor, stroke 1.6, sin relleno salvo Hombros/Core donde el
+ * entre sí, con trazo grueso para combinar con el estilo arcade
+ * (currentColor, stroke 2.2, sin relleno salvo Hombros/Core donde el
  * relleno ayuda a la lectura a tamaño chico).
  */
 export function IconoMusculo({ grupo, size = 22 }: Props) {
-  const comunes = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+  const comunes = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
   switch (grupo) {
     case 'pecho':

@@ -6,7 +6,11 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
   const { usuario, cargando } = useAuth();
 
   if (cargando) {
-    return <div className="estado-vacio">Cargando…</div>;
+    return (
+      <div style={{ padding: 'var(--space-5)' }}>
+        <div className="estado-vacio">Cargando…</div>
+      </div>
+    );
   }
 
   if (!usuario) {

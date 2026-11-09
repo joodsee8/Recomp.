@@ -8,32 +8,39 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  gap: var(--space-2);
 }
 
 .macro-bar-etiqueta {
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 800;
+  font-size: 1rem;
 }
 
 .macro-bar-valores {
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.15rem;
+  font-weight: 600;
 }
 .macro-bar-meta {
   color: var(--color-text-muted);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
+/* Barra de vida: bloques sueltos dentro de un marco, como en un videojuego. */
 .macro-bar-pista {
   display: flex;
-  gap: 2px;
+  gap: 3px;
+  padding: 3px;
+  background: var(--color-pantalla);
+  border: var(--borde) solid var(--color-contorno);
+  border-radius: 8px;
 }
 
 .macro-bar-segmento {
   flex: 1;
-  height: 14px;
+  min-width: 0;
+  height: 18px;
   background: var(--color-surface-raised);
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 .macro-bar-segmento--lleno.macro-bar-segmento--proteina {
@@ -50,6 +57,7 @@
 }
 
 .macro-bar-exceso {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--color-peligro);
 }

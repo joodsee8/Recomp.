@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { BarraEtapas } from '../ui/BarraEtapas';
 import './FaseRegistrarSerie.css';
 
 interface Props {
@@ -33,9 +34,7 @@ export function FaseRegistrarSerie({ nombreEjercicio, numeroSerie, totalSeries, 
 
   return (
     <form className="fase-registrar" onSubmit={manejarSubmit}>
-      <span className="fase-registrar-progreso dato-numerico">
-        Serie {numeroSerie} / {totalSeries}
-      </span>
+      <BarraEtapas actual={numeroSerie} total={totalSeries} etiqueta="Serie" />
       <h1>{nombreEjercicio}</h1>
 
       <div className="fase-registrar-inputs">

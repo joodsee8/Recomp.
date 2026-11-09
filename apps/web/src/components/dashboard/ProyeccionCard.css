@@ -2,26 +2,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-2);
   margin-bottom: var(--space-3);
 }
 
 .proyeccion-card-badge {
-  font-size: 0.65rem;
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-text-faint);
-  border: 1px solid var(--color-border-strong);
-  border-radius: 999px;
-  padding: 2px 8px;
+  color: var(--color-moneda);
+  border: 2px solid var(--color-moneda);
+  border-radius: 8px;
+  padding: 2px 10px;
 }
 
 .proyeccion-card--pendiente {
   border-style: dashed;
+  box-shadow: none;
 }
 
 .proyeccion-card-nota {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: var(--color-text-muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }

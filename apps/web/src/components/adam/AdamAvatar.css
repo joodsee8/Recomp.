@@ -1,0 +1,28 @@
+.adam-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.adam-avatar img,
+.adam-avatar svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Mientras A.D.A.M. piensa, el avatar tiembla de lado a lado a saltos. */
+.adam-avatar--pensando {
+  animation: adam-pensando 0.5s steps(2) infinite;
+}
+
+@keyframes adam-pensando {
+  0% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(2px);
+  }
+}

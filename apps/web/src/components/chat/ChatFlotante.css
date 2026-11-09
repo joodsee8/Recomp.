@@ -1,0 +1,168 @@
+/* ---------- Botón flotante ---------- */
+.adam-fab {
+  position: absolute;
+  right: var(--space-4);
+  bottom: calc(var(--alto-tabbar) + env(safe-area-inset-bottom, 0px) + var(--space-4));
+  z-index: 20;
+  width: 4.25rem;
+  height: 4.25rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-adam);
+  border: var(--borde) solid var(--color-contorno);
+  border-radius: 50%;
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.3), 0 5px 0 var(--color-contorno);
+  transition: transform 0.06s steps(2), box-shadow 0.06s steps(2);
+  /* El único movimiento "porque sí" de la app: A.D.A.M. flota esperando. */
+  animation: adam-flota 1.6s steps(2) infinite alternate;
+}
+.adam-fab:active {
+  transform: translateY(5px);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.3), 0 0 0 var(--color-contorno);
+}
+.adam-fab:focus-visible {
+  outline: 3px solid var(--color-grasa);
+  outline-offset: 3px;
+}
+.adam-fab--pensando {
+  animation: none;
+}
+
+@keyframes adam-flota {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -4px;
+  }
+}
+
+.adam-fab-aviso {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-proteina);
+  color: var(--color-tinta);
+  border: 3px solid var(--color-contorno);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ---------- Hoja de chat ---------- */
+.chat-capa {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--vv-arriba, 0px);
+  height: var(--vv-alto, 100dvh);
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.chat-capa[hidden] {
+  display: none;
+}
+
+.chat-fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 4, 26, 0.72);
+}
+
+.chat-hoja {
+  position: relative;
+  width: 100%;
+  max-width: var(--ancho-app);
+  height: min(calc(100% - 2.5rem), 46rem);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  border: var(--borde) solid var(--color-adam);
+  border-bottom: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+  animation: chat-sube 0.2s steps(4);
+}
+.chat-hoja:focus {
+  outline: none;
+}
+
+@keyframes chat-sube {
+  from {
+    transform: translateY(2.5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.chat-cabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-bottom: var(--borde) solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.chat-retrato {
+  padding: 4px;
+  background: var(--color-adam-bg);
+  border: var(--borde) solid var(--color-adam);
+  border-radius: var(--radius-sm);
+  display: flex;
+}
+
+.chat-cabecera-texto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.chat-nombre {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.1;
+}
+.chat-estado {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.chat-cerrar {
+  width: var(--toque);
+  height: var(--toque);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  border: var(--borde) solid var(--color-contorno);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.28), 0 4px 0 var(--color-contorno);
+  transition: transform 0.06s steps(2), box-shadow 0.06s steps(2);
+}
+.chat-cerrar:active {
+  transform: translateY(4px);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.28), 0 0 0 var(--color-contorno);
+}
+.chat-cerrar:focus-visible {
+  outline: 3px solid var(--color-grasa);
+  outline-offset: 3px;
+}

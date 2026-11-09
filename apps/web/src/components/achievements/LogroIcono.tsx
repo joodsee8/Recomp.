@@ -16,7 +16,7 @@ interface Props {
  * `onError` cae a un ícono neutro por si el archivo llegara a faltar — un
  * ícono roto no debería tumbar toda la pantalla de logros.
  */
-export function LogroIcono({ icono, desbloqueado, tamano = 40 }: Props) {
+export function LogroIcono({ icono, desbloqueado, tamano = 48 }: Props) {
   return (
     <img
       src={`/assets/icons/${icono}.svg`}

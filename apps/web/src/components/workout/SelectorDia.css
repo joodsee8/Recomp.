@@ -4,41 +4,57 @@
   gap: var(--space-5);
 }
 
+/* Selector de nivel: un botón grande por día, fácil de tocar con el pulgar. */
 .selector-dia-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-3);
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
 }
 
 .selector-dia-boton {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-2);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  gap: var(--space-1);
+  min-height: 4.75rem;
+  background: var(--color-surface-raised);
+  border: var(--borde) solid var(--color-contorno);
   border-radius: var(--radius-md);
-  padding: var(--space-4);
+  padding: var(--space-3) 3.25rem var(--space-3) var(--space-4);
   text-align: left;
-  transition: border-color 0.15s ease, transform 0.1s ease;
+  color: var(--color-text);
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.28), 0 5px 0 var(--color-contorno);
+  transition: transform 0.06s steps(2), box-shadow 0.06s steps(2);
 }
-.selector-dia-boton:hover {
-  border-color: var(--color-proteina);
+.selector-dia-boton::after {
+  content: '▶';
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-moneda);
+  font-size: 1.25rem;
 }
 .selector-dia-boton:active {
-  transform: scale(0.99);
+  transform: translateY(5px);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.28), 0 0 0 var(--color-contorno);
+}
+.selector-dia-boton:focus-visible {
+  outline: 3px solid var(--color-grasa);
+  outline-offset: 3px;
 }
 
 .selector-dia-nombre {
   font-family: var(--font-display);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  font-size: 0.95rem;
+  font-size: 1.3rem;
+  line-height: 1.15;
 }
 
 .selector-dia-grupos {
-  font-size: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--color-text-muted);
-  font-family: var(--font-mono);
 }

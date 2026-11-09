@@ -22,9 +22,9 @@ function PuntoPersonalizado(props: { cx?: number; cy?: number; payload?: PuntoDe
   if (cx == null || cy == null) return null;
 
   if (payload?.huboRecordPersonal) {
-    return <Dot cx={cx} cy={cy} r={5} fill="#c23b3b" stroke="none" />;
+    return <Dot cx={cx} cy={cy} r={7} fill="#7cff8a" stroke="#07041a" strokeWidth={2} />;
   }
-  return <Dot cx={cx} cy={cy} r={3} fill="#8b9098" stroke="none" />;
+  return <Dot cx={cx} cy={cy} r={4} fill="#b1abe6" stroke="none" />;
 }
 
 export function ProgresoChart({ puntos }: Props) {
@@ -40,39 +40,39 @@ export function ProgresoChart({ puntos }: Props) {
 
   return (
     <div className="progreso-chart">
-      <ResponsiveContainer width="100%" height={260}>
+      <ResponsiveContainer width="100%" height={240}>
         <LineChart data={datos} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-          <CartesianGrid stroke="#2c3036" vertical={false} />
+          <CartesianGrid stroke="#2b2476" vertical={false} />
           <XAxis
             dataKey="fecha"
-            tick={{ fill: '#8b9098', fontSize: 12, fontFamily: 'var(--font-mono)' }}
-            axisLine={{ stroke: '#2c3036' }}
+            tick={{ fill: '#b1abe6', fontSize: 13, fontFamily: 'var(--font-display)' }}
+            axisLine={{ stroke: '#4237b0' }}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: '#8b9098', fontSize: 12, fontFamily: 'var(--font-mono)' }}
+            tick={{ fill: '#b1abe6', fontSize: 13, fontFamily: 'var(--font-display)' }}
             axisLine={false}
             tickLine={false}
             width={40}
           />
           <Tooltip
             contentStyle={{
-              background: '#24282d',
-              border: '1px solid #3a3f46',
-              borderRadius: 6,
-              fontFamily: 'var(--font-mono)',
-              fontSize: 12
+              background: '#2b2476',
+              border: '3px solid #6a5cf0',
+              borderRadius: 10,
+              fontFamily: 'var(--font-display)',
+              fontSize: 14
             }}
-            labelStyle={{ color: '#8b9098' }}
+            labelStyle={{ color: '#b1abe6' }}
             formatter={(valor: number) => [`${valor} kg`, 'Peso máximo']}
           />
           <Line
             type="monotone"
             dataKey="pesoMaximoKg"
-            stroke="#d9a62e"
-            strokeWidth={2}
+            stroke="#ffd23f"
+            strokeWidth={3}
             dot={<PuntoPersonalizado />}
-            activeDot={{ r: 6 }}
+            activeDot={{ r: 8 }}
           />
         </LineChart>
       </ResponsiveContainer>

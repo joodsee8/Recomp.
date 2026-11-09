@@ -1,21 +1,18 @@
 .logros-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(7, 4, 26, 0.72);
   z-index: 100;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: var(--space-5);
 }
 
+/* En el teléfono ocupa toda la pantalla; en pantallas grandes, la columna de la app. */
 .logros-ventana {
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
   width: 100%;
-  max-width: 640px;
-  max-height: 85vh;
+  max-width: var(--ancho-app);
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -25,29 +22,44 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-4) var(--space-5);
-  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-3);
+  padding: calc(var(--space-3) + env(safe-area-inset-top, 0px)) var(--space-4) var(--space-3);
+  background: var(--color-surface);
+  border-bottom: var(--borde) solid var(--color-border);
   flex-shrink: 0;
 }
 
 .logros-ventana-cerrar {
-  background: none;
-  border: none;
-  color: var(--color-text-muted);
-  font-size: 1rem;
-  padding: var(--space-2);
-}
-.logros-ventana-cerrar:hover {
+  width: var(--toque);
+  height: var(--toque);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-raised);
   color: var(--color-text);
+  border: var(--borde) solid var(--color-contorno);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.28), 0 4px 0 var(--color-contorno);
+  transition: transform 0.06s steps(2), box-shadow 0.06s steps(2);
+}
+.logros-ventana-cerrar:active {
+  transform: translateY(4px);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.28), 0 0 0 var(--color-contorno);
+}
+.logros-ventana-cerrar:focus-visible {
+  outline: 3px solid var(--color-grasa);
+  outline-offset: 3px;
 }
 
 .logros-ventana-contenido {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  padding: var(--space-5);
+  overscroll-behavior: contain;
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-5);
 }
 
 .logros-ventana-seccion h2 {
@@ -58,27 +70,15 @@
 .logros-ventana-grid {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .logros-ventana-footer {
-  padding: var(--space-4) var(--space-5);
-  border-top: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+  background: var(--color-surface);
+  border-top: var(--borde) solid var(--color-border);
   flex-shrink: 0;
 }
 .logros-ventana-footer .boton {
   width: 100%;
-}
-
-@media (max-width: 560px) {
-  .logros-overlay {
-    padding: 0;
-  }
-  .logros-ventana {
-    max-width: none;
-    max-height: 100%;
-    height: 100%;
-    border-radius: 0;
-    border: none;
-  }
 }

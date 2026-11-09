@@ -1,117 +1,64 @@
-import type { ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { ChatFlotante } from '../chat/ChatFlotante';
+import { PixelIcon, type NombreIcono } from '../ui/PixelIcon';
 import './AppShell.css';
 
-function IconoChat() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 5h16v11H8l-4 4V5Z" />
-    </svg>
-  );
-}
-function IconoDashboard() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 19V10" />
-      <path d="M11 19V5" />
-      <path d="M18 19v-7" />
-    </svg>
-  );
-}
-function IconoTracker() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M6 7v10" />
-      <path d="M18 7v10" />
-      <path d="M2 9v6" />
-      <path d="M22 9v6" />
-      <path d="M6 12h12" />
-    </svg>
-  );
-}
-function IconoHistorial() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="8" />
-      <path d="M12 8v4l3 2" />
-    </svg>
-  );
-}
-
-const ENLACES = [
-  { ruta: '/', etiqueta: 'Chat', codigo: '01', Icono: IconoChat },
-  { ruta: '/dashboard', etiqueta: 'Dashboard', codigo: '02', Icono: IconoDashboard },
-  { ruta: '/tracker', etiqueta: 'Tracker', codigo: '03', Icono: IconoTracker },
-  { ruta: '/historial', etiqueta: 'Historial', codigo: '04', Icono: IconoHistorial }
+const ENLACES: { ruta: string; etiqueta: string; icono: NombreIcono }[] = [
+  { ruta: '/dashboard', etiqueta: 'Dashboard', icono: 'panel' },
+  { ruta: '/tracker', etiqueta: 'Tracker', icono: 'pesas' },
+  { ruta: '/historial', etiqueta: 'Historial', icono: 'reloj' }
 ];
 
-interface Props {
-  children: ReactNode;
-  /** Quita el padding del área de contenido — lo usa el Chat para ir a pantalla completa. */
-  sinPadding?: boolean;
-}
-
-export function AppShell({ children, sinPadding }: Props) {
+/**
+ * Layout de toda la app autenticada. Es una ruta padre: las pantallas se
+ * dibujan en <Outlet />, y la barra, el HUD y el chat de A.D.A.M. se quedan
+ * montados al cambiar de pestaña.
+ */
+export function AppShell() {
   const { usuario, cerrarSesion } = useAuth();
+  const { pathname } = useLocation();
+  const contenidoRef = useRef<HTMLElement>(null);
+
+  // Cada pestaña empieza arriba.
+  useEffect(() => {
+    contenidoRef.current?.scrollTo({ top: 0 });
+  }, [pathname]);
 
   return (
     <div className="shell">
-      {/* --- Sidebar: solo desktop --- */}
-      <aside className="shell-sidebar">
-        <div className="shell-marca">
-          RECOMP<span className="shell-marca-punto">.</span>
-        </div>
-
-        <nav className="shell-nav">
-          {ENLACES.map(({ ruta, etiqueta, codigo, Icono }) => (
-            <NavLink
-              key={ruta}
-              to={ruta}
-              end={ruta === '/'}
-              className={({ isActive }) => `shell-nav-link${isActive ? ' shell-nav-link--activo' : ''}`}
-            >
-              <Icono />
-              <span className="shell-nav-texto">{etiqueta}</span>
-              <span className="shell-nav-codigo">{codigo}</span>
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="shell-usuario">
-          <div className="shell-usuario-nombre">{usuario?.nombre}</div>
-          <button className="shell-usuario-salir" onClick={cerrarSesion}>
-            Cerrar sesión
-          </button>
-        </div>
-      </aside>
-
-      {/* --- Top bar: solo mobile --- */}
-      <header className="shell-topbar-movil">
+      <header className="shell-hud">
         <span className="shell-marca">
           RECOMP<span className="shell-marca-punto">.</span>
         </span>
-        <button className="shell-topbar-movil-salir" onClick={cerrarSesion} aria-label="Cerrar sesión">
-          ⏻
+        <span className="shell-jugador">
+          <span className="shell-jugador-etiqueta">P1</span>
+          <span className="shell-jugador-nombre">{usuario?.nombre}</span>
+        </span>
+        <button className="shell-salir" onClick={cerrarSesion} aria-label="Cerrar sesión">
+          <PixelIcon nombre="salir" tamano={20} />
         </button>
       </header>
 
-      <main className={`shell-contenido${sinPadding ? ' shell-contenido--sin-padding' : ''}`}>{children}</main>
+      <main className="shell-contenido" ref={contenidoRef}>
+        <Outlet />
+      </main>
 
-      {/* --- Tab bar inferior: solo mobile --- */}
-      <nav className="shell-tabbar-movil">
-        {ENLACES.map(({ ruta, etiqueta, Icono }) => (
+      <nav className="shell-tabbar" aria-label="Secciones">
+        {ENLACES.map(({ ruta, etiqueta, icono }) => (
           <NavLink
             key={ruta}
             to={ruta}
-            end={ruta === '/'}
-            className={({ isActive }) => `shell-tabbar-link${isActive ? ' shell-tabbar-link--activo' : ''}`}
+            className={({ isActive }) => `shell-tab${isActive ? ' shell-tab--activo' : ''}`}
           >
-            <Icono />
+            <PixelIcon nombre={icono} tamano={24} />
             <span>{etiqueta}</span>
           </NavLink>
         ))}
       </nav>
+
+      <ChatFlotante />
     </div>
   );
 }

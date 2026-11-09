@@ -1,17 +1,17 @@
 .serie-row {
   display: grid;
-  grid-template-columns: 24px 1fr 1fr auto auto;
+  grid-template-columns: 1.5rem 1fr 1fr auto auto;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
   padding: var(--space-2) 0;
 }
 .serie-row--incompleta {
-  opacity: 0.45;
+  opacity: 0.5;
 }
 
 .serie-row-numero {
-  color: var(--color-text-faint);
-  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
   text-align: center;
 }
 
@@ -19,56 +19,56 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border-strong);
+  min-height: var(--toque);
+  background: var(--color-pantalla);
+  border: var(--borde) solid var(--color-border-strong);
   border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-1) var(--space-3);
 }
 .serie-row-campo input {
+  min-width: 0;
   background: none;
   border: none;
   color: var(--color-text);
   width: 100%;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
 }
 .serie-row-campo input:focus {
   outline: none;
 }
 .serie-row-campo:focus-within {
-  border-color: var(--color-carbos);
+  border-color: var(--color-moneda);
 }
 .serie-row-unidad {
-  font-size: 0.7rem;
-  color: var(--color-text-faint);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
 }
 
 .serie-row-check input {
-  width: 18px;
-  height: 18px;
+  width: 1.75rem;
+  height: 1.75rem;
   accent-color: var(--color-exito);
 }
 
-/* Elemento insignia: sello de récord personal, como un sello de goma
-   estampado sobre la fila — el único momento "de color fuerte" en toda la
-   pantalla del Tracker, reservado para lo único que de verdad importa
-   celebrar: superaste tu propio máximo. */
+/* Sello de récord personal: el único destello fuerte de la pantalla.
+   Es el "NEW RECORD" del tracker, reservado para superar tu propio máximo. */
 .serie-row-pr {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.7rem;
-  color: var(--color-proteina);
-  border: 2px solid var(--color-proteina);
-  border-radius: 3px;
-  padding: 1px 6px;
+  font-size: 1rem;
+  color: var(--color-tinta);
+  background: var(--color-exito);
+  border: var(--borde) solid var(--color-contorno);
+  border-radius: 6px;
+  padding: 1px 8px;
   transform: rotate(-8deg);
-  letter-spacing: 0.05em;
   justify-self: start;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 26rem) {
   .serie-row {
-    grid-template-columns: 20px 1fr 1fr auto;
-    gap: var(--space-2);
+    grid-template-columns: 1.25rem 1fr 1fr auto;
   }
   .serie-row-unidad {
     display: none;

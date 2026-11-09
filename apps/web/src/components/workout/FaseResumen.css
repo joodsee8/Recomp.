@@ -8,19 +8,26 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  align-items: center;
+  gap: var(--space-3);
 }
 
 .fase-resumen-check {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-exito);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-tinta);
+  background: var(--color-exito);
+  border: var(--borde) solid var(--color-contorno);
+  border-radius: 8px;
+  padding: 2px 14px;
 }
 
 .fase-resumen-prs {
-  color: var(--color-proteina);
+  color: var(--color-exito);
+  font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1.15rem;
 }
 
 .fase-resumen-lista {
@@ -30,6 +37,6 @@
 }
 
 .fase-resumen-series {
-  border-top: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-border);
   padding-top: var(--space-2);
 }

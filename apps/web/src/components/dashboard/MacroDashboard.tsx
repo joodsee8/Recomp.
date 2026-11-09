@@ -5,6 +5,7 @@ import { MacroChartCard } from './MacroChartCard';
 import { ProgresoMuscularCard } from './ProgresoMuscularCard';
 import { ProyeccionCard } from './ProyeccionCard';
 import { LogrosVentana } from '../achievements/LogrosVentana';
+import { PixelIcon } from '../ui/PixelIcon';
 import './MacroDashboard.css';
 
 function fechaDeHoy(): string {
@@ -53,13 +54,15 @@ export function MacroDashboard() {
         </div>
         <div className="dashboard-encabezado-acciones">
           <button className="boton dashboard-boton-logros" onClick={() => setMostrarLogros(true)}>
-            🏆 Logros
+            <PixelIcon nombre="trofeo" tamano={20} />
+            Logros
           </button>
           <input
             type="date"
             className="dashboard-fecha"
             value={fecha}
             max={fechaDeHoy()}
+            aria-label="Fecha a consultar"
             onChange={(e) => setFecha(e.target.value)}
           />
         </div>

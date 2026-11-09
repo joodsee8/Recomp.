@@ -1,3 +1,4 @@
+import { BarraEtapas } from '../ui/BarraEtapas';
 import './FaseInicioEjercicio.css';
 
 interface Props {
@@ -25,9 +26,7 @@ export function FaseInicioEjercicio({
 }: Props) {
   return (
     <div className="fase-inicio">
-      <span className="fase-inicio-progreso dato-numerico">
-        Ejercicio {numeroEjercicio} / {totalEjercicios}
-      </span>
+      <BarraEtapas actual={numeroEjercicio} total={totalEjercicios} etiqueta="Ejercicio" />
       <h1>{nombreEjercicio}</h1>
       {notas && <p className="fase-inicio-notas">{notas}</p>}
 

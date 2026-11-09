@@ -1,5 +1,6 @@
 import { RadialBarChart, RadialBar, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 import type { ResumenDelDia } from '../../types/api';
+import { MacroProgressBar } from './MacroProgressBar';
 import './MacroChartCard.css';
 
 interface Props {
@@ -20,10 +21,10 @@ export function MacroChartCard({ resumen }: Props) {
   const { totales, meta, restante } = resumen;
 
   const datos: AnilloData[] = [
-    { nombre: 'Calorías', pct: calcularPct(totales.calorias, meta.calorias), fill: '#8b9098' },
-    { nombre: 'Proteína', pct: calcularPct(totales.proteinaG, meta.proteinaG), fill: '#c23b3b' },
-    { nombre: 'Carbohidratos', pct: calcularPct(totales.carbohidratosG, meta.carbohidratosG), fill: '#d9a62e' },
-    { nombre: 'Grasas', pct: calcularPct(totales.grasasG, meta.grasasG), fill: '#3e6fc2' }
+    { nombre: 'Calorías', pct: calcularPct(totales.calorias, meta.calorias), fill: '#b1abe6' },
+    { nombre: 'Proteína', pct: calcularPct(totales.proteinaG, meta.proteinaG), fill: '#ff5c7a' },
+    { nombre: 'Carbohidratos', pct: calcularPct(totales.carbohidratosG, meta.carbohidratosG), fill: '#ff9f43' },
+    { nombre: 'Grasas', pct: calcularPct(totales.grasasG, meta.grasasG), fill: '#3fd8ff' }
   ];
 
   return (
@@ -32,17 +33,17 @@ export function MacroChartCard({ resumen }: Props) {
 
       <div className="macro-chart-card-cuerpo">
         <div className="macro-chart-card-grafica">
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={220}>
             <RadialBarChart
               data={datos}
-              innerRadius="34%"
+              innerRadius="38%"
               outerRadius="100%"
               startAngle={90}
               endAngle={-270}
               barCategoryGap="18%"
             >
               <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
-              <RadialBar background={{ fill: '#24282d' }} dataKey="pct" cornerRadius={4} />
+              <RadialBar background={{ fill: '#0e0a28' }} dataKey="pct" cornerRadius={4} />
             </RadialBarChart>
           </ResponsiveContainer>
           <div className="macro-chart-card-centro">
@@ -51,15 +52,18 @@ export function MacroChartCard({ resumen }: Props) {
           </div>
         </div>
 
-        <ul className="macro-chart-card-info">
-          {datos.map((anillo) => (
-            <li key={anillo.nombre}>
-              <span className="macro-chart-card-punto" style={{ background: anillo.fill }} />
-              <span className="macro-chart-card-info-nombre">{anillo.nombre}</span>
-              <span className="dato-numerico macro-chart-card-info-pct">{anillo.pct}%</span>
-            </li>
-          ))}
-        </ul>
+        <div className="macro-chart-card-barras">
+          <MacroProgressBar etiqueta="Calorías" actual={totales.calorias} meta={meta.calorias} unidad="kcal" color="neutral" />
+          <MacroProgressBar etiqueta="Proteína" actual={totales.proteinaG} meta={meta.proteinaG} unidad="g" color="proteina" />
+          <MacroProgressBar
+            etiqueta="Carbohidratos"
+            actual={totales.carbohidratosG}
+            meta={meta.carbohidratosG}
+            unidad="g"
+            color="carbos"
+          />
+          <MacroProgressBar etiqueta="Grasas" actual={totales.grasasG} meta={meta.grasasG} unidad="g" color="grasa" />
+        </div>
       </div>
 
       <p className="macro-chart-card-nota">

@@ -2,49 +2,48 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  max-width: 420px;
-  margin: 0 auto;
   text-align: center;
-  padding-top: var(--space-6);
 }
 
 .fase-calentamiento-cambiar-dia {
   align-self: flex-start;
+  min-height: var(--toque);
   background: none;
   border: none;
-  color: var(--color-text-faint);
-  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  padding: 0 var(--space-2) 0 0;
 }
-.fase-calentamiento-cambiar-dia:hover {
+.fase-calentamiento-cambiar-dia:active {
   color: var(--color-text);
 }
 
 .fase-calentamiento-real {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: var(--borde) solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--space-5);
+  box-shadow: var(--sombra-panel);
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   text-align: left;
 }
 .fase-calentamiento-duracion {
-  font-size: 0.8rem;
-  color: var(--color-carbos);
+  font-size: 1.15rem;
+  color: var(--color-moneda);
   font-weight: 600;
 }
 .fase-calentamiento-real p {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--color-text-muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .fase-calentamiento-etiqueta {
-  font-size: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
   color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .fase-calentamiento-lista {
@@ -58,16 +57,17 @@
 }
 .fase-calentamiento-lista li {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: var(--borde) solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
-  font-size: 0.9rem;
+  font-size: 1rem;
+  line-height: 1.5;
   color: var(--color-text-muted);
 }
 
 .fase-calentamiento-acciones {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-4);
   margin-top: var(--space-3);
 }

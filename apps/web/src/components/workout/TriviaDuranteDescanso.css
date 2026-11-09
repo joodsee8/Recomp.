@@ -1,10 +1,10 @@
 .trivia {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: var(--borde) solid var(--color-border);
   border-radius: var(--radius-md);
+  box-shadow: var(--sombra-panel);
   padding: var(--space-4);
   width: 100%;
-  max-width: 380px;
 }
 
 .trivia-encabezado {
@@ -16,38 +16,38 @@
 
 .trivia-categoria {
   font-family: var(--font-display);
-  font-size: 0.7rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   color: var(--color-grasa);
 }
 
 .trivia-otro {
+  min-height: 2.75rem;
   background: none;
   border: none;
-  color: var(--color-text-faint);
-  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  padding: 0 var(--space-2);
 }
-.trivia-otro:hover {
+.trivia-otro:active {
   color: var(--color-text);
 }
 
 .trivia-texto {
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.55;
 }
 
 .trivia-respuesta {
-  margin-top: var(--space-2);
-  font-size: 0.85rem;
+  margin-top: var(--space-3);
+  font-size: 1rem;
   color: var(--color-exito);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .trivia-boton-revelar {
   margin-top: var(--space-3);
-  font-size: 0.8rem;
+  width: 100%;
 }
 
 .trivia-opciones {
@@ -58,16 +58,19 @@
 }
 
 .trivia-opcion {
+  min-height: var(--toque);
   text-align: left;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border-strong);
+  background: var(--color-pantalla);
+  border: var(--borde) solid var(--color-border-strong);
   color: var(--color-text);
-  padding: var(--space-3);
+  padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
-  font-size: 0.85rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
 }
-.trivia-opcion:not(:disabled):hover {
-  border-color: var(--color-carbos);
+.trivia-opcion:not(:disabled):active {
+  border-color: var(--color-moneda);
 }
 .trivia-opcion--correcta {
   border-color: var(--color-exito);

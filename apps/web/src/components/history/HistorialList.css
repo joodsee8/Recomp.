@@ -4,18 +4,21 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
 }
 
 .historial-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: var(--space-2);
   padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
+}
+.historial-item:first-child {
+  padding-top: 0;
 }
 .historial-item:last-child {
   border-bottom: none;
+  padding-bottom: 0;
 }
 
 .historial-item-info {
@@ -24,29 +27,33 @@
   gap: 2px;
 }
 .historial-item-dia {
+  font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1.15rem;
 }
 .historial-item-fecha {
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   color: var(--color-text-muted);
   text-transform: capitalize;
 }
 
 .historial-item-metricas {
   display: flex;
-  gap: var(--space-4);
-  font-size: 0.8rem;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  font-size: 1rem;
   color: var(--color-text-muted);
   align-items: center;
 }
 
+/* Sello de récord personal: lima, el color de "vas bien". */
 .historial-item-pr {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.7rem;
-  color: var(--color-proteina);
-  border: 1px solid var(--color-proteina);
-  border-radius: 3px;
-  padding: 1px 5px;
+  font-size: 0.9rem;
+  color: var(--color-tinta);
+  background: var(--color-exito);
+  border: 2px solid var(--color-contorno);
+  border-radius: 6px;
+  padding: 1px 8px;
 }
