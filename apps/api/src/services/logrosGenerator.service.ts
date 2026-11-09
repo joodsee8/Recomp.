@@ -167,7 +167,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
 export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
   const [resumenHistorial, logrosActivos] = await Promise.all([
     construirResumenHistorial(userId),
-    Logro.find({ userId, desbloqueado: false, fechaFinPeriodo: { $gte: new Date() } }).select('titulo')
+    Logro.find({ userId, desbloqueado: false, fechaFinPeriodo: { $gte: new Date() } }).select('titulo') .lean()
   ]);
 
   const titulosActivos = logrosActivos.map((l) => l.titulo);
