@@ -6,7 +6,8 @@ import { METRICAS_LOGROS, esMetricaValida } from '../data/metricasLogros';
 import { generarJSON } from './gemini.service';
 import { calcularLimitesPeriodo } from './logrosEvaluator.service';
 import { AppError } from '../utils/AppError';
-
+import { Types } from 'mongoose';
+import { MetricaLogro } from '../data/metricasLogros';
 /**
  * logrosGenerator.service.ts
  * ---------------------------
@@ -130,7 +131,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
   categoria: 'dieta' | 'ejercicio' | 'mixto';
   periodo: 'diario' | 'semanal' | 'mensual';
   icono: string;
-  metrica: string;
+  metrica: MetricaLogro;          // <- antes: string
   comparador: '>=' | '=';
   objetivo: number;
 } | null {
@@ -153,7 +154,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
     categoria: crudo.categoria as 'dieta' | 'ejercicio' | 'mixto',
     periodo: crudo.periodo as 'diario' | 'semanal' | 'mensual',
     icono: crudo.icono,
-    metrica: crudo.metrica,
+    metrica: crudo.metrica as MetricaLogro,
     comparador: crudo.comparador as '>=' | '=',
     objetivo: Math.round(objetivo)
   };
@@ -182,7 +183,12 @@ export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
   }
 
   const titulosActivosLower = new Set(titulosActivos.map((t) => t.toLowerCase()));
-  const logrosAInsertar = [];
+  const logrosAInsertar: Pick<
+  ILogro,
+  'userId' | 'titulo' | 'descripcion' | 'categoria' | 'periodo' | 'icono' |
+  'criterio' | 'progresoActual' | 'metaObjetivo' | 'desbloqueado' |
+  'fechaInicioPeriodo' | 'fechaFinPeriodo'
+>[] = [];
 
   for (const crudo of respuesta.logros) {
     const validado = validarLogroGenerado(crudo);
@@ -192,7 +198,7 @@ export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
     const { inicio, fin } = calcularLimitesPeriodo(validado.periodo);
 
     logrosAInsertar.push({
-      userId,
+      userId: new Types.ObjectId(userId),
       titulo: validado.titulo,
       descripcion: validado.descripcion,
       categoria: validado.categoria,
@@ -213,5 +219,6 @@ export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
     throw new AppError(502, 'Gemini devolvió logros pero ninguno pasó la validación. Intenta de nuevo.');
   }
 
-  return Logro.insertMany(logrosAInsertar);
+  const creados = await Logro.insertMany(logrosAInsertar);
+return creados as unknown as ILogro[];
 }
