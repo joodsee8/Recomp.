@@ -42,7 +42,7 @@ function leerVariablesDeEntorno(): EnvConfig {
     nodeEnv: (process.env.NODE_ENV as EnvConfig['nodeEnv']) ?? 'development',
     clientOrigin: process.env.CLIENT_ORIGIN ?? 'http://localhost:5173',
     geminiApiKey: process.env.GEMINI_API_KEY?.trim() || null,
-    geminiModelo: process.env.GEMINI_MODELO ?? 'gemini-3.8-flash'
+    geminiModelo: process.env.GEMINI_MODELO ?? 'gemini-3.6-flash'
   };
 }
 
