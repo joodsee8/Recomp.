@@ -1,13 +1,13 @@
+import { Types } from 'mongoose';
 import { WorkoutLog } from '../models/WorkoutLog.model';
 import { MacroLog } from '../models/MacroLog.model';
-import { Logro, ILogro } from '../models/Logro.model';
+import { Logro, ILogro, ICriterioLogro } from '../models/Logro.model';
 import { ICONOS_LOGROS, esIconoValido } from '../data/iconosLogros';
-import { METRICAS_LOGROS, esMetricaValida } from '../data/metricasLogros';
+import { METRICAS_LOGROS, MetricaLogro, esMetricaValida } from '../data/metricasLogros';
 import { generarJSON } from './gemini.service';
-import { calcularLimitesPeriodo } from './logrosEvaluator.service';
+import { calcularLimitesPeriodo, evaluarYActualizarLogros } from './logrosEvaluator.service';
 import { AppError } from '../utils/AppError';
-import { Types } from 'mongoose';
-import { MetricaLogro } from '../data/metricasLogros';
+
 /**
  * logrosGenerator.service.ts
  * ---------------------------
@@ -131,7 +131,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
   categoria: 'dieta' | 'ejercicio' | 'mixto';
   periodo: 'diario' | 'semanal' | 'mensual';
   icono: string;
-  metrica: MetricaLogro;          // <- antes: string
+  metrica: MetricaLogro;
   comparador: '>=' | '=';
   objetivo: number;
 } | null {
@@ -168,7 +168,7 @@ function validarLogroGenerado(crudo: LogroGeneradoCrudo): {
 export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
   const [resumenHistorial, logrosActivos] = await Promise.all([
     construirResumenHistorial(userId),
-    Logro.find({ userId, desbloqueado: false, fechaFinPeriodo: { $gte: new Date() } }).select('titulo') .lean()
+    Logro.find({ userId, desbloqueado: false, fechaFinPeriodo: { $gte: new Date() } }).select('titulo')
   ]);
 
   const titulosActivos = logrosActivos.map((l) => l.titulo);
@@ -183,12 +183,8 @@ export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
   }
 
   const titulosActivosLower = new Set(titulosActivos.map((t) => t.toLowerCase()));
-  const logrosAInsertar: Pick<
-  ILogro,
-  'userId' | 'titulo' | 'descripcion' | 'categoria' | 'periodo' | 'icono' |
-  'criterio' | 'progresoActual' | 'metaObjetivo' | 'desbloqueado' |
-  'fechaInicioPeriodo' | 'fechaFinPeriodo'
->[] = [];
+  const logrosAInsertar: Partial<ILogro>[] = [];
+  const userObjectId = new Types.ObjectId(userId);
 
   for (const crudo of respuesta.logros) {
     const validado = validarLogroGenerado(crudo);
@@ -198,13 +194,13 @@ export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
     const { inicio, fin } = calcularLimitesPeriodo(validado.periodo);
 
     logrosAInsertar.push({
-      userId: new Types.ObjectId(userId),
+      userId: userObjectId,
       titulo: validado.titulo,
       descripcion: validado.descripcion,
       categoria: validado.categoria,
       periodo: validado.periodo,
       icono: validado.icono,
-      criterio: { metrica: validado.metrica, comparador: validado.comparador, objetivo: validado.objetivo },
+      criterio: { metrica: validado.metrica, comparador: validado.comparador, objetivo: validado.objetivo } as ICriterioLogro,
       progresoActual: 0,
       metaObjetivo: validado.objetivo,
       desbloqueado: false,
@@ -219,6 +215,10 @@ export async function generarNuevosLogros(userId: string): Promise<ILogro[]> {
     throw new AppError(502, 'Gemini devolvió logros pero ninguno pasó la validación. Intenta de nuevo.');
   }
 
-  const creados = await Logro.insertMany(logrosAInsertar);
-return creados as unknown as ILogro[];
+  const creados = await Logro.insertMany(logrosAInsertar as ILogro[]);
+
+  // Evaluarlos al instante: si el usuario ya venía cumpliendo (ej. 2 entrenos esta semana),
+  // el logro nace con su progreso real y puede desbloquearse de inmediato.
+  await evaluarYActualizarLogros(userId);
+  return Logro.find({ _id: { $in: creados.map((l) => l._id) } });
 }

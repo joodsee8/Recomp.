@@ -177,7 +177,11 @@ function seCumpleCriterio(comparador: '>=' | '=', progreso: number, objetivo: nu
  */
 export async function evaluarYActualizarLogros(userId: string): Promise<ILogro[]> {
   const ahora = new Date();
-  const logrosActivos = await Logro.find({ userId, desbloqueado: false, fechaFinPeriodo: { $gte: ahora } });
+  // Se incluyen también los que cerraron su periodo hace poco: si el usuario cumplió la meta
+  // el último día y no abrió la pantalla antes de medianoche, el logro se desbloquea igual
+  // (el progreso siempre se calcula dentro de [inicio, fin] del propio logro, así que es exacto).
+  const ventanaDeGracia = new Date(ahora.getTime() - 35 * 24 * 60 * 60 * 1000);
+  const logrosActivos = await Logro.find({ userId, desbloqueado: false, fechaFinPeriodo: { $gte: ventanaDeGracia } });
 
   for (const logro of logrosActivos) {
     const progreso = await calcularProgreso(userId, logro.criterio.metrica, logro.fechaInicioPeriodo, logro.fechaFinPeriodo);
